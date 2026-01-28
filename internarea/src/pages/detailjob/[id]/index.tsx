@@ -230,7 +230,7 @@ const index = () => {
         {/* Internship Details Section */}
         <div className="p-6 border-b">
           <h2 className="text-xl font-bold text-gray-900 mb-4">
-            About the Internship
+            About the Job
           </h2>
           <p className="text-gray-600 mb-6">{jobdata.aboutJob}</p>
 
