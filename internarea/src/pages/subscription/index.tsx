@@ -51,7 +51,7 @@ export default function SubscriptionPage() {
         },
       };
 
-      new window.Razorpay(options).open();
+      new (window as any).Razorpay(options).open();
     } catch (err: any) {
       toast.error(err.response?.data?.message);
     }
