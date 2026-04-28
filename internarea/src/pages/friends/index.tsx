@@ -14,7 +14,7 @@ export default function Friends() {
 
   const BASE = "https://internshala-clone-uclt.onrender.com/api/friend";
 
-  // ✅ Fetch friend data
+  // Fetch friend data
   const fetchData = async (uid: string) => {
     try {
       const res = await axios.get(`${BASE}/${uid}`);
@@ -24,7 +24,7 @@ export default function Friends() {
     }
   };
 
-  // ✅ Wait for user
+  // Wait for user
   useEffect(() => {
     if (user?.uid) {
       setLoadingUser(false);
@@ -32,7 +32,7 @@ export default function Friends() {
     }
   }, [user]);
 
-  // 🔍 Search users by email
+  // Search users by email
   const searchUsers = async (value: string) => {
     setSearch(value);
 
@@ -48,7 +48,7 @@ export default function Friends() {
     }
   };
 
-  // 🤝 Send request
+  // Send request
   const sendRequest = async (toUserId: string) => {
     try {
       await axios.post(`${BASE}/send`, {
@@ -84,7 +84,7 @@ export default function Friends() {
     <div className="p-6 max-w-xl mx-auto">
       <h1 className="text-xl font-bold">Friends</h1>
 
-      {/* 🔍 SEARCH */}
+      {/* SEARCH */}
       <input
         placeholder="Search by email..."
         value={search}
@@ -104,7 +104,7 @@ export default function Friends() {
         </div>
       ))}
 
-      {/* 📥 Requests */}
+      {/* Requests */}
       <h2 className="mt-4 font-bold">Requests Received</h2>
       {data.requestsReceived.length === 0 && <p>No requests</p>}
       {data.requestsData.map((u: any) => (
@@ -125,7 +125,7 @@ export default function Friends() {
         </div>
       ))}
 
-      {/* 👥 Friends */}
+      {/* Friends */}
       <h2 className="mt-4 font-bold">Friends List</h2>
       {data.friends.length === 0 && <p>No friends yet</p>}
       {data.friendsData.map((u: any) => (

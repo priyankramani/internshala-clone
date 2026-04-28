@@ -5,7 +5,7 @@ const requestIp = require("request-ip");
 const { getDeviceInfo } = require("../utils/deviceInfo");
 const axios = require("axios");
 
-// 🔐 LOGIN TRACK + RULE CHECK
+// LOGIN TRACK + RULE CHECK
 router.post("/track", async (req, res) => {
   try {
     const { userId, email, skipOTP } = req.body;
@@ -15,7 +15,7 @@ router.post("/track", async (req, res) => {
 
     const currentHour = new Date().getHours();
 
-    // 🚫 RULE 1: Mobile restriction
+    // RULE 1: Mobile restriction
     if (device === "mobile") {
       if (currentHour < 10 || currentHour > 13) {
         return res.status(403).json({
@@ -24,7 +24,7 @@ router.post("/track", async (req, res) => {
       }
     }
 
-    // 🚨 RULE 2: Chrome requires OTP
+    // RULE 2: Chrome requires OTP
     if (!skipOTP && browser === "Chrome") {
       await axios.post(
         "https://internshala-clone-uclt.onrender.com/api/otp/send",
@@ -39,7 +39,7 @@ router.post("/track", async (req, res) => {
       });
     }
 
-    // 🚫 PREVENT DUPLICATE ENTRIES (within 5 seconds)
+    // PREVENT DUPLICATE ENTRIES (within 5 seconds)
     const lastLogin = await LoginHistory.findOne({ userId }).sort({
       loginTime: -1,
     });
@@ -53,7 +53,7 @@ router.post("/track", async (req, res) => {
       }
     }
 
-    // ✅ SAVE LOGIN HISTORY
+    // SAVE LOGIN HISTORY
     await LoginHistory.create({
       userId,
       browser,
@@ -69,7 +69,7 @@ router.post("/track", async (req, res) => {
   }
 });
 
-// 📜 GET LOGIN HISTORY
+// GET LOGIN HISTORY
 router.get("/:userId", async (req, res) => {
   try {
     const history = await LoginHistory.find({

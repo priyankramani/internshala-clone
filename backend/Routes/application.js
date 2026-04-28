@@ -8,7 +8,7 @@ router.post("/", async (req, res) => {
   try {
     console.log("📥 Incoming:", req.body);
 
-    // ✅ Normalize email
+    // Normalize email
     const userEmail = req.body.user?.email?.toLowerCase();
 
     if (!userEmail) {
@@ -21,23 +21,20 @@ router.post("/", async (req, res) => {
 
     console.log("👤 User Email:", userEmail);
 
-    // 🔹 GET SUBSCRIPTION
+    // GET SUBSCRIPTION
     const sub = await Subscription.findOne({ email: userEmail });
     console.log("📦 Subscription:", sub);
 
-    // 🔥 IDENTIFY USER TYPE
+    // IDENTIFY USER TYPE
     const isFreeUser = !sub || sub.plan === "free";
 
-    // 🔥 DEFINE ONCE (fix scope bug)
     const startOfMonth = new Date();
     startOfMonth.setUTCDate(1);
     startOfMonth.setUTCHours(0, 0, 0, 0);
 
     console.log("🕒 Start of month (UTC):", startOfMonth);
 
-    // =========================
-    // 🔹 FREE PLAN LOGIC
-    // =========================
+    // FREE PLAN LOGIC
     if (isFreeUser) {
       const count = await Application.countDocuments({
         "user.email": userEmail,
@@ -56,9 +53,7 @@ router.post("/", async (req, res) => {
       }
     }
 
-    // =========================
-    // 🔹 PAID PLAN LOGIC (DYNAMIC COUNT)
-    // =========================
+    // PAID PLAN LOGIC (DYNAMIC COUNT)
     if (sub && sub.plan !== "free") {
       if (new Date() > sub.endDate) {
         return res.status(403).json({
@@ -81,7 +76,7 @@ router.post("/", async (req, res) => {
       }
     }
 
-    // 🔥 CLEAN DATA STRUCTURE
+    // CLEAN DATA STRUCTURE
     const applicationData = {
       company: req.body.company,
       category: req.body.category,
@@ -96,9 +91,7 @@ router.post("/", async (req, res) => {
       },
     };
 
-    // =========================
-    // 🔥 DOUBLE CHECK (ANTI-SPAM)
-    // =========================
+    // DOUBLE CHECK
     if (isFreeUser) {
       const countAgain = await Application.countDocuments({
         "user.email": userEmail,
@@ -115,19 +108,9 @@ router.post("/", async (req, res) => {
       }
     }
 
-    // =========================
-    // 🔹 SAVE APPLICATION
-    // =========================
+    // SAVE APPLICATION
     const newApp = await Application.create(applicationData);
     console.log("✅ Saved:", newApp._id);
-
-    // // =========================
-    // // 🔹 INCREMENT USAGE (PAID ONLY)
-    // // =========================
-    // if (sub && sub.plan !== "free") {
-    //   sub.applicationsUsed += 1;
-    //   await sub.save();
-    // }
 
     res.status(201).json({
       success: true,

@@ -1,10 +1,10 @@
 const Post = require("../Model/Post");
 
 async function canUserPost(userId, friendCount) {
-  // ❌ No friends
+  // No friends
   if (friendCount === 0) return false;
 
-  // ✅ Unlimited
+  // Unlimited
   if (friendCount > 10) return true;
 
   const startOfDay = new Date();

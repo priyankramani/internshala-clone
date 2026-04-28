@@ -8,7 +8,7 @@ import { store } from "../store/store";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-import axios from "axios"; // ✅ ADDED
+import axios from "axios";
 
 import { auth } from "@/firebase/firebase";
 import { login, logout } from "@/Feature/Userslice";
@@ -20,7 +20,7 @@ import "@/i18n";
 import { selectLanguage } from "@/Feature/languageSlice";
 import i18n from "@/i18n";
 
-// ✅ Sync Language
+// Sync Language
 function LanguageSync() {
   const lang = useSelector(selectLanguage);
 
@@ -33,7 +33,7 @@ function LanguageSync() {
   return null;
 }
 
-// ✅ Firebase Auth Listener
+// Firebase Auth Listener
 function AuthListener() {
   const dispatch = useDispatch();
 
@@ -44,7 +44,6 @@ function AuthListener() {
         return;
       }
 
-      // 🚫 If already on OTP page → don't trigger again
       if (window.location.pathname === "/otp-verify") return;
 
       try {
@@ -55,25 +54,25 @@ function AuthListener() {
           {
             userId: authuser.uid,
             email: authuser.email,
-            skipOTP: otpVerified, // 🔥 KEY FIX
+            skipOTP: otpVerified,
           },
         );
 
-        // 🚫 MOBILE BLOCK
+        // MOBILE BLOCK
         if (res.data?.message?.includes("Mobile login")) {
           alert(res.data.message);
           await auth.signOut();
           return;
         }
 
-        // 🚨 OTP REQUIRED
+        // OTP REQUIRED
         if (res.data.requireOTP) {
           sessionStorage.setItem("otp_user", JSON.stringify(authuser));
           window.location.href = "/otp-verify";
           return;
         }
 
-        // ✅ NORMAL LOGIN
+        // NORMAL LOGIN
         dispatch(
           login({
             uid: authuser.uid,

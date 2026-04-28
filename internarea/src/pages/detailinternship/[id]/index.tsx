@@ -77,7 +77,7 @@ const index = () => {
   const { id } = router.query;
   const [internshipData, setinternship] = useState<any>([]);
   useEffect(() => {
-    if (!id) return; // 🔴 ADD THIS
+    if (!id) return;
     const fetchdata = async () => {
       try {
         const res = await axios.get(
@@ -199,7 +199,7 @@ const index = () => {
 
       try {
         const res = await axios.post(
-          "https://internshala-clone-uclt.onrender.com/api/application", // ⚠️ use YOUR backend
+          "https://internshala-clone-uclt.onrender.com/api/application",
           applicationdata,
         );
 
@@ -208,10 +208,8 @@ const index = () => {
       } catch (error: any) {
         console.error(error);
 
-        // 🔥 THIS IS STEP 4 (IMPORTANT)
         if (error.response?.status === 403) {
           toast.error(error.response.data.message);
-          // Example: "Application limit reached. Upgrade your plan."
         } else {
           toast.error("Failed to submit application");
         }
@@ -223,10 +221,6 @@ const index = () => {
         error.response?.data?.message || "Failed to submit application",
       );
     }
-    // catch (error: any) {
-    //   console.error(error.response?.data || error);
-    //   toast.error("Failed to submit application");
-    // }
   };
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">

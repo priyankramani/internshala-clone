@@ -6,7 +6,7 @@ function getDeviceInfo(req) {
 
   let browser = "Unknown";
 
-  // 🔥 IMPORTANT: Order matters
+  // IMPORTANT: Order matters
   if (/edg/i.test(ua)) {
     browser = "Edge";
   } else if (/chrome/i.test(ua)) {

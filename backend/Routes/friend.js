@@ -3,7 +3,6 @@ const router = express.Router();
 const Friend = require("../Model/Friend");
 const User = require("../Model/User");
 
-// Ensure user document exists
 async function getOrCreate(userId) {
   let user = await Friend.findOne({ userId });
   if (!user) {
@@ -17,7 +16,7 @@ async function getOrCreate(userId) {
   return user;
 }
 
-// 🔹 Send Friend Request
+// Send Friend Request
 router.post("/send", async (req, res) => {
   const { fromUserId, toUserId } = req.body;
 
@@ -45,7 +44,7 @@ router.post("/send", async (req, res) => {
   res.json({ message: "Request sent" });
 });
 
-// 🔹 Accept Request
+// Accept Request
 router.post("/accept", async (req, res) => {
   const { userId, fromUserId } = req.body;
 
@@ -66,7 +65,7 @@ router.post("/accept", async (req, res) => {
   res.json({ message: "Friend added" });
 });
 
-// 🔹 Reject Request
+// Reject Request
 router.post("/reject", async (req, res) => {
   const { userId, fromUserId } = req.body;
 
@@ -84,16 +83,16 @@ router.post("/reject", async (req, res) => {
   res.json({ message: "Request rejected" });
 });
 
-// 🔹 Get Friend Data
+// Get Friend Data
 router.get("/:userId", async (req, res) => {
   const user = await getOrCreate(req.params.userId);
 
-  // ✅ Fetch friend emails
+  // Fetch friend emails
   const friendUsers = await User.find({
     uid: { $in: user.friends },
   }).select("uid email");
 
-  // ✅ Fetch request emails
+  // Fetch request emails
   const requestUsers = await User.find({
     uid: { $in: user.requestsReceived },
   }).select("uid email");

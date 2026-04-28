@@ -1,5 +1,3 @@
-// subscription.tsx (UPDATED)
-
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { selectuser } from "@/Feature/Userslice";
@@ -46,7 +44,6 @@ export default function SubscriptionPage() {
           );
 
           toast.success(`${plan} Activated 🎉`);
-          // ✅ ADD THIS
           window.location.href = "/profile";
         },
       };

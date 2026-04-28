@@ -2,10 +2,9 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 
-// TEMP STORAGE (in-memory)
 let otpStore = {};
 
-// 📧 Configure mail (Gmail App Password)
+// Configure mail (Gmail App Password)
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -14,7 +13,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// 🔹 SEND OTP (UPDATED ROUTE NAME)
+// SEND OTP
 router.post("/send", async (req, res) => {
   const { email } = req.body;
 
@@ -37,7 +36,7 @@ router.post("/send", async (req, res) => {
       text: `Your OTP is ${otp}`,
     });
 
-    console.log(`OTP sent to ${email}: ${otp}`); // helpful for testing
+    console.log(`OTP sent to ${email}: ${otp}`);
 
     res.json({
       success: true,
@@ -53,7 +52,7 @@ router.post("/send", async (req, res) => {
   }
 });
 
-// 🔹 VERIFY OTP (UPDATED ROUTE NAME)
+// VERIFY OTP
 router.post("/verify", (req, res) => {
   const { email, otp } = req.body;
 

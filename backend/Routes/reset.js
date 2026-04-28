@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const resetRequests = {};
-// { email: timestamp }
 
 router.post("/request-reset", (req, res) => {
   const { email } = req.body;

@@ -15,7 +15,7 @@ router.post("/save", async (req, res) => {
   res.json(user);
 });
 
-// 🔍 Search by email
+// Search by email
 router.get("/search", async (req, res) => {
   const { email } = req.query;
 

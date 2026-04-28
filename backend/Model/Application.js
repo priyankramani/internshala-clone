@@ -6,10 +6,10 @@ const applicationSchema = new mongoose.Schema(
     category: { type: String, required: true },
     coverLetter: { type: String, required: true },
     internshipId: { type: String, default: null },
-    jobId: { type: String, default: null }, // ✅ ADD THIS
+    jobId: { type: String, default: null },
     availability: { type: String, required: true },
 
-    resume: { type: Object}, // ✅ make optional
+    resume: { type: Object }, //optional
 
     user: {
       email: { type: String, required: true, index: true },
@@ -26,7 +26,7 @@ const applicationSchema = new mongoose.Schema(
       default: Date.now,
     },
   },
-  { timestamps: true }, // 🔥 IMPORTANT
+  { timestamps: true },
 );
 
 module.exports = mongoose.model("Application", applicationSchema);

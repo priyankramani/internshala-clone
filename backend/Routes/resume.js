@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const razorpay = require("../utils/razorpay");
-const Resume = require("../Model/Resume"); // ✅ ADD THIS
+const Resume = require("../Model/Resume");
 const Subscription = require("../Model/Subscription");
 const nodemailer = require("nodemailer");
 const plans = require("../utils/planConfig");
 const sendInvoice = require("../utils/sendInvoice");
 const crypto = require("crypto");
 
-// 🔹 CREATE ORDER
+// CREATE ORDER
 router.post("/create-order", async (req, res) => {
   try {
     const options = {
@@ -25,16 +25,16 @@ router.post("/create-order", async (req, res) => {
   }
 });
 
-// 🔹 SAVE RESUME (DB VERSION)
+// SAVE RESUME
 router.post("/save-resume", async (req, res) => {
   const { email, resumeData } = req.body;
 
   try {
-    // 👉 check if already exists
+    // check if already exists
     let existing = await Resume.findOne({ userEmail: email });
 
     if (existing) {
-      // 🔄 update existing resume
+      // update existing resume
       existing.name = resumeData.name;
       existing.education = resumeData.education;
       existing.experience = resumeData.experience;
@@ -48,7 +48,7 @@ router.post("/save-resume", async (req, res) => {
       });
     }
 
-    // 🆕 create new resume
+    // create new resume
     const newResume = await Resume.create({
       userEmail: email,
       ...resumeData,
@@ -65,7 +65,7 @@ router.post("/save-resume", async (req, res) => {
   }
 });
 
-// 🔹 GET RESUME
+// GET RESUME
 router.get("/get-resume/:email", async (req, res) => {
   try {
     const resume = await Resume.findOne({
@@ -77,7 +77,8 @@ router.get("/get-resume/:email", async (req, res) => {
     console.log(err);
     res.status(500).json({ error: "Error fetching resume" });
   }
-}); // 🔹 CREATE SUBSCRIPTION ORDER
+});
+// CREATE SUBSCRIPTION ORDER
 router.post("/create-subscription-order", async (req, res) => {
   try {
     const { plan } = req.body;
@@ -85,12 +86,12 @@ router.post("/create-subscription-order", async (req, res) => {
     const now = new Date();
     const hour = now.getHours();
 
-    // ⛔ TIME RESTRICTION
-    // if (hour !== 10) {
-    //   return res.status(403).json({
-    //     message: "Payments allowed only between 10 AM to 11 AM",
-    //   });
-    // }
+    // TIME RESTRICTION
+    if (hour !== 10) {
+      return res.status(403).json({
+        message: "Payments allowed only between 10 AM to 11 AM",
+      });
+    }
 
     const pricing = {
       bronze: 10000,
@@ -111,7 +112,7 @@ router.post("/create-subscription-order", async (req, res) => {
     res.status(500).json({ error: "Order failed" });
   }
 });
-// 🔹 ACTIVATE SUBSCRIPTION
+// ACTIVATE SUBSCRIPTION
 router.post("/activate-subscription", async (req, res) => {
   try {
     const { email, plan } = req.body;
@@ -134,7 +135,7 @@ router.post("/activate-subscription", async (req, res) => {
     endDate.setMonth(endDate.getMonth() + 1);
 
     const subscription = await Subscription.findOneAndUpdate(
-      { email }, // ✅ FIXED
+      { email },
       {
         email,
         plan,
@@ -146,7 +147,7 @@ router.post("/activate-subscription", async (req, res) => {
       { upsert: true, returnDocument: "after" },
     );
 
-    // 📧 SEND INVOICE
+    // SEND INVOICE
     await sendInvoice(email, plan, selectedPlan.price);
 
     res.json({
@@ -181,7 +182,7 @@ router.post("/verify-payment", (req, res) => {
   }
 });
 
-// 🔹 GET SUBSCRIPTION BY EMAIL
+// GET SUBSCRIPTION BY EMAIL
 router.get("/subscription/:email", async (req, res) => {
   try {
     let sub = await Subscription.findOne({
@@ -194,13 +195,12 @@ router.get("/subscription/:email", async (req, res) => {
 
     const selectedPlan = plans[sub.plan.toUpperCase()];
 
-    // ✅ FORCE ADD LIMIT IN RESPONSE (NO DEPENDENCY ON DB)
     const response = {
       ...sub._doc,
       applicationLimit: selectedPlan ? selectedPlan.limit : 0,
     };
 
-    console.log("FINAL RESPONSE:", response); // 🔥 DEBUG
+    console.log("FINAL RESPONSE:", response);
 
     res.json(response);
   } catch (err) {
@@ -208,6 +208,5 @@ router.get("/subscription/:email", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch subscription" });
   }
 });
-
 
 module.exports = router;

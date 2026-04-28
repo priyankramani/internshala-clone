@@ -54,10 +54,9 @@ router.get("/:userId", async (req, res) => {
 
   const postsWithEmails = await Promise.all(
     posts.map(async (post) => {
-      // ✅ Post owner email
+      // Post owner email
       const user = await User.findOne({ uid: post.userId });
 
-      // ✅ Enrich comments with emails
       const commentsWithEmails = await Promise.all(
         post.comments.map(async (comment) => {
           const commentUser = await User.findOne({

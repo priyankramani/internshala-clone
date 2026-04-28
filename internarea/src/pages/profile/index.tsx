@@ -11,7 +11,7 @@ const ProfilePage = () => {
   const [hasResume, setHasResume] = useState(false);
   const [loginHistory, setLoginHistory] = useState<any[]>([]);
 
-  // ✅ NEW STATES
+  // NEW STATES
   const [subscription, setSubscription] = useState<any>(null);
   const [stats, setStats] = useState({ active: 0, accepted: 0 });
 
@@ -30,7 +30,7 @@ const ProfilePage = () => {
       .catch(console.log);
   }, [user?.email]);
 
-  // 🔹 LOGIN HISTORY (OLD)
+  // LOGIN HISTORY
   useEffect(() => {
     if (!user?.uid) return;
 
@@ -48,7 +48,7 @@ const ProfilePage = () => {
     fetchHistory();
   }, [user]);
 
-  // 🔹 CHECK RESUME (OLD)
+  // CHECK RESUME
   useEffect(() => {
     if (!user?.email) return;
 
@@ -64,25 +64,7 @@ const ProfilePage = () => {
       .catch(console.log);
   }, [user]);
 
-  // ✅ FETCH SUBSCRIPTION (NEW)
-  // useEffect(() => {
-  //   if (!user?.email) return;
-
-  //   const fetchSub = async () => {
-  //     try {
-  //       const res = await axios.get(
-  //         `https://internshala-clone-uclt.onrender.com/api/resume/subscription/${user.email}`,
-  //       );
-  //       setSubscription(res.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-
-  //   fetchSub();
-  // }, [user]);
-
-  // ✅ FETCH APPLICATION STATS (NEW)
+  // FETCH APPLICATION STATS
   useEffect(() => {
     if (!user?.email) return;
 
@@ -92,7 +74,7 @@ const ProfilePage = () => {
           `https://internshala-clone-uclt.onrender.com/api/resume/subscription/${user.email}`,
         );
 
-        console.log("SUB DATA:", res.data); // 🔥 DEBUG
+        console.log("SUB DATA:", res.data);
 
         setSubscription(res.data);
       } catch (err) {
@@ -134,7 +116,7 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            {/* ✅ SUBSCRIPTION CARD (NEW) */}
+            {/* SUBSCRIPTION CARD */}
             <div className="bg-purple-50 rounded-lg p-4 text-center mb-6">
               <h2 className="text-purple-700 font-semibold text-lg">
                 {subscription?.plan
@@ -191,7 +173,7 @@ const ProfilePage = () => {
                 </button>
               </Link>
 
-              {/* ✅ NEW UPGRADE BUTTON */}
+              {/*NEW UPGRADE BUTTON */}
               <Link href="/subscription">
                 <button className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow hover:bg-purple-700">
                   Upgrade Plan

@@ -1,6 +1,15 @@
-import { ArrowUpRight, Calendar, Clock, DollarSign, Filter, Pin, PlayCircle, X } from 'lucide-react';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
+import {
+  ArrowUpRight,
+  Calendar,
+  Clock,
+  DollarSign,
+  Filter,
+  Pin,
+  PlayCircle,
+  X,
+} from "lucide-react";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 // const internshipData = [
@@ -36,7 +45,7 @@ import axios from "axios";
 //   },
 // ];
 function Index() {
-    const [filteredInternships, setfilteredInternships] = useState<any>([]);
+  const [filteredInternships, setfilteredInternships] = useState<any>([]);
   const [isFiltervisible, setisFiltervisible] = useState(false);
   const [filter, setfilters] = useState({
     category: "",
@@ -46,21 +55,23 @@ function Index() {
     stipend: 50,
   });
   const [internshipData, setinternship] = useState<any>([]);
-  useEffect(()=>{
-    const fetchdata = async ()=>{
+  useEffect(() => {
+    const fetchdata = async () => {
       try {
-        const res = await axios.get("https://internshala-clone-uclt.onrender.com/api/internship");
+        const res = await axios.get(
+          "https://internshala-clone-uclt.onrender.com/api/internship",
+        );
         setinternship(res.data);
         setfilteredInternships(res.data);
       } catch (error) {
         console.log(error);
       }
-    }
-    fetchdata()
-  },[])
+    };
+    fetchdata();
+  }, []);
 
   useEffect(() => {
-    const filtered = internshipData.filter((internship:any) => {
+    const filtered = internshipData.filter((internship: any) => {
       const matchesCategory = internship.category
         .toLowerCase()
         .includes(filter.category.toLowerCase());
@@ -70,7 +81,7 @@ function Index() {
       return matchesCategory && matchesLocation;
     });
     setfilteredInternships(filtered);
-  }, [filter, internshipData]); 
+  }, [filter, internshipData]);
   const handlefilterchange = (e: any) => {
     const { name, value, type, checked } = e.target;
     setfilters((prev) => ({
@@ -355,8 +366,8 @@ function Index() {
           </div>
         </div>
       )}
-    </div> 
-  )
+    </div>
+  );
 }
 
-export default Index
+export default Index;

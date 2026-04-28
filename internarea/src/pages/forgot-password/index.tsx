@@ -59,7 +59,7 @@ export default function ForgotPassword() {
     }
 
     try {
-      // 🔥 Step 1: Check backend restriction
+      // Check backend restriction
       await axios.post(
         "https://internshala-clone-uclt.onrender.com/api/reset/request-reset",
         {
@@ -67,12 +67,12 @@ export default function ForgotPassword() {
         },
       );
 
-      // 🔥 Step 2: Firebase reset email
+      // Firebase reset email
       await resetPassword(email);
 
       toast.success("Reset link sent to your email");
 
-      // optional: store locally for UX
+      // optional
       localStorage.setItem("resetRequest", new Date().toISOString());
     } catch (error: any) {
       if (error.response?.status === 429) {

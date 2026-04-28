@@ -20,12 +20,12 @@ export default function ResumePage() {
   const [otp, setOtp] = useState("");
   const [showOtp, setShowOtp] = useState(false);
 
-  // 🔹 Handle form change
+  // Handle form change
   const handleChange = (e: any) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // 🔹 Send OTP
+  // Send OTP
   const sendOtp = async () => {
     try {
       await axios.post(
@@ -42,7 +42,7 @@ export default function ResumePage() {
     }
   };
 
-  // 🔹 Verify OTP + Payment
+  // Verify OTP + Payment
   const verifyOtpAndPay = async () => {
     try {
       const res = await axios.post(
@@ -61,7 +61,7 @@ export default function ResumePage() {
     }
   };
 
-  // 🔹 Razorpay Payment
+  // Razorpay Payment
   const startPayment = async () => {
     try {
       const { data } = await axios.post(
@@ -76,16 +76,16 @@ export default function ResumePage() {
       }
 
       const options = {
-        key: "rzp_test_SdOlrkVOSi3Smb", // 🔥 PUT REAL KEY
+        key: "rzp_test_SdOlrkVOSi3Smb",
         amount: data.amount,
         currency: "INR",
         name: "InternArea",
         description: "Resume Service",
         order_id: data.id,
 
-        handler: async function (response : any) {
+        handler: async function (response: any) {
           try {
-            // 🔹 Step A: Verify payment
+            // Verify payment
             const verifyRes = await axios.post(
               "https://internshala-clone-uclt.onrender.com/api/resume/verify-payment",
               response,
@@ -95,8 +95,6 @@ export default function ResumePage() {
               toast.error("Payment verification failed");
               return;
             }
-
-            // 🔹 Step B: KEEP YOUR EXISTING LOGIC (no change)
             toast.success("Payment Successful 🎉");
 
             await axios.post(
@@ -135,23 +133,6 @@ export default function ResumePage() {
     }
   };
 
-  // const handleFakePayment = async () => {
-  //   try {
-  //     toast.success("Simulated Payment Success (Demo Mode)");
-
-  //     await axios.post("https://internshala-clone-uclt.onrender.com/api/resume/save-resume", {
-  //       email: user?.email,
-  //       resumeData: form,
-  //     });
-  //     setIsPaid(true); // ✅ important
-  //     setExistingResume(form); // add this
-
-  //     toast.success("Resume Generated Successfully 🎉");
-  //   } catch (err) {
-  //     toast.error("Something went wrong");
-  //   }
-  // };
-
   const downloadPDF = async () => {
     const html2canvas = (await import("html2canvas")).default;
     const { jsPDF } = await import("jspdf");
@@ -163,14 +144,12 @@ export default function ResumePage() {
       return;
     }
 
-    // ✅ Create a temporary A4 container (DOES NOT affect UI)
     const a4 = document.createElement("div");
-    a4.style.width = "794px"; // A4 width (96 DPI)
-    a4.style.minHeight = "1123px"; // A4 height
+    a4.style.width = "794px";
+    a4.style.minHeight = "1123px";
     a4.style.padding = "20px";
     a4.style.background = "#ffffff";
 
-    // Clone your resume into A4 container
     const clone = element.cloneNode(true) as HTMLElement;
     clone.style.transform = "scale(1)";
     clone.style.width = "100%";
@@ -183,13 +162,13 @@ export default function ResumePage() {
       useCORS: true,
     });
 
-    document.body.removeChild(a4); // cleanup
+    document.body.removeChild(a4);
 
     const imgData = canvas.toDataURL("image/png");
 
     const pdf = new jsPDF("p", "mm", "a4");
 
-    pdf.addImage(imgData, "PNG", 0, 0, 210, 297); // ✅ exact A4 size
+    pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
 
     pdf.save("resume.pdf");
   };
@@ -203,7 +182,6 @@ export default function ResumePage() {
           `https://internshala-clone-uclt.onrender.com/api/resume/get-resume/${user?.email}`,
         );
 
-        // ✅ CHECK IF REAL DATA EXISTS
         if (
           res.data &&
           res.data.name &&
@@ -212,7 +190,7 @@ export default function ResumePage() {
         ) {
           setExistingResume(res.data);
         } else {
-          setExistingResume(null); // 🔥 IMPORTANT
+          setExistingResume(null);
         }
       } catch (err) {
         console.log(err);
@@ -227,7 +205,6 @@ export default function ResumePage() {
     <div className="max-w-xl mx-auto mt-10 p-6 shadow-lg">
       <h1 className="text-2xl font-bold mb-4">Resume</h1>
 
-      {/* ✅ IF RESUME EXISTS → SHOW IT */}
       {existingResume && (
         <div className="mt-6">
           <div
@@ -240,7 +217,7 @@ export default function ResumePage() {
             }}
           >
             <div className="flex min-h-[500px]">
-              {/* 🔵 LEFT SIDEBAR */}
+              {/*LEFT SIDEBAR */}
               <div
                 className="w-2/5 text-white p-6 flex flex-col items-center"
                 style={{ background: "#1D4ED8" }}
@@ -257,7 +234,7 @@ export default function ResumePage() {
                 <p className="text-sm text-center opacity-90">{user?.email}</p>
               </div>
 
-              {/* ⚪ RIGHT CONTENT */}
+              {/* RIGHT CONTENT */}
               <div className="w-3/5 p-8 space-y-6">
                 {/* EDUCATION */}
                 <div>
@@ -285,7 +262,7 @@ export default function ResumePage() {
                   </p>
                 </div>
 
-                {/* ✅ SKILLS (NOW ON RIGHT SIDE) */}
+                {/* SKILLS */}
                 <div>
                   <h3
                     className="text-lg font-bold border-b pb-1 mb-2 flex items-center gap-2"
@@ -321,7 +298,6 @@ export default function ResumePage() {
         </div>
       )}
 
-      {/* ✅ IF NO RESUME → SHOW FORM */}
       {!existingResume && (
         <>
           <input
@@ -369,13 +345,6 @@ export default function ResumePage() {
               >
                 Verify & Pay
               </button>
-
-              {/* <button
-                onClick={handleFakePayment}
-                className="bg-gray-500 text-white px-4 py-2 mt-2 ml-2"
-              >
-                Demo Payment
-              </button> */}
             </div>
           )}
         </>

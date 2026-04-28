@@ -1,7 +1,13 @@
-// import axios from "axios";
-// import { toast } from "react-toastify";
 import axios from "axios";
-import {Building2,Calendar,CheckCircle2,Mail,Tag,User,XCircle,} from "lucide-react";
+import {
+  Building2,
+  Calendar,
+  CheckCircle2,
+  Mail,
+  Tag,
+  User,
+  XCircle,
+} from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -48,12 +54,14 @@ const index = () => {
   const [searchTerm, setsearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
   const [data, setdata] = useState<any>([]);
-  
+
   useEffect(() => {
     const fetchdata = async () => {
       try {
         // const res = await axios.get("https://internshala-clone-y2p2.onrender.com/api/application");
-        const res = await axios.get(`https://internshala-clone-uclt.onrender.com/api/application`);
+        const res = await axios.get(
+          `https://internshala-clone-uclt.onrender.com/api/application`,
+        );
         setdata(res.data);
       } catch (error) {
         console.log(error);
@@ -72,13 +80,12 @@ const index = () => {
   });
   const handleacceptandreject = async (id: any, action: any) => {
     try {
-      // const res = await axios.put(
-      //   `https://internshala-clone-y2p2.onrender.com/api/application/${id}`,
-      //   { action }
-      // );
-      const res = await axios.put(`https://internshala-clone-uclt.onrender.com/api/application/${id}`, {action});
+      const res = await axios.put(
+        `https://internshala-clone-uclt.onrender.com/api/application/${id}`,
+        { action },
+      );
       const updateappliacrtion = data.map((app: any) =>
-        app._id === id ? res.data.data : app
+        app._id === id ? res.data.data : app,
       );
       setdata(updateappliacrtion);
       toast.success("updated successfully");
@@ -243,7 +250,7 @@ const index = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
                         className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(
-                          application.status
+                          application.status,
                         )}`}
                       >
                         {application.status}
@@ -257,12 +264,18 @@ const index = () => {
                         >
                           View Details
                         </Link>
-                        <button onClick={()=>{handleacceptandreject(application._id,"accepted")}}
+                        <button
+                          onClick={() => {
+                            handleacceptandreject(application._id, "accepted");
+                          }}
                           className="text-green-600 hover:text-green-900"
                         >
                           <CheckCircle2 className="h-5 w-5" />
                         </button>
-                        <button onClick={()=>{handleacceptandreject(application._id,"rejected")}}
+                        <button
+                          onClick={() => {
+                            handleacceptandreject(application._id, "rejected");
+                          }}
                           className="text-red-600 hover:text-red-900"
                         >
                           <XCircle className="h-5 w-5" />

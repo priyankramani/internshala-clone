@@ -14,7 +14,7 @@ export default function PublicSpace() {
 
   const BASE_URL = "https://internshala-clone-uclt.onrender.com/api/post";
 
-  // ✅ Fetch posts safely
+  // Fetch posts safely
   const fetchPosts = async (uid: string) => {
     try {
       const res = await axios.get(`${BASE_URL}/${uid}`);
@@ -24,7 +24,7 @@ export default function PublicSpace() {
     }
   };
 
-  // ✅ Wait for user
+  // Wait for user
   useEffect(() => {
     if (user && user.uid) {
       setLoadingUser(false);
@@ -32,7 +32,7 @@ export default function PublicSpace() {
     }
   }, [user]);
 
-  // 📤 Create Post
+  // Create Post
   const handlePost = async () => {
     if (!file) return alert("Select file");
 
@@ -64,7 +64,7 @@ export default function PublicSpace() {
     }
   };
 
-  // ❤️ Like
+  // Like
   const handleLike = async (postId: string) => {
     await axios.post(`${BASE_URL}/like/${postId}`, {
       userId: user.uid,
@@ -72,7 +72,7 @@ export default function PublicSpace() {
     fetchPosts(user.uid);
   };
 
-  // 💬 Comment
+  // Comment
   const handleComment = async (postId: string, text: string) => {
     await axios.post(`${BASE_URL}/comment/${postId}`, {
       userId: user.uid,
@@ -81,7 +81,6 @@ export default function PublicSpace() {
     fetchPosts(user.uid);
   };
 
-  // ✅ Loading states AFTER hooks
   if (loadingUser) return <p>Loading user...</p>;
 
   return (

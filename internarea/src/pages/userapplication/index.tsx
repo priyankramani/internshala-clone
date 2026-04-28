@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
-import {Building2,Calendar,CheckCircle2,Mail,Tag,User,XCircle,} from "lucide-react";
+import {
+  Building2,
+  Calendar,
+  CheckCircle2,
+  Mail,
+  Tag,
+  User,
+  XCircle,
+} from "lucide-react";
 import Link from "next/link";
-// import axios from "axios";
 import { selectuser } from "@/Feature/Userslice";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -45,7 +52,7 @@ const getStatusColor = (status: any) => {
 const index = () => {
   const [searchTerm, setsearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
-  const user=useSelector(selectuser)
+  const user = useSelector(selectuser);
   // const [user, setuser] = useState<any>({
   //   name: "Rahul",
   //   email: "xyz@gmail.com",
@@ -57,8 +64,9 @@ const index = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        // const res = await axios.get("https://internshala-clone-y2p2.onrender.com/api/application");
-        const res = await axios.get("https://internshala-clone-uclt.onrender.com/api/application");
+        const res = await axios.get(
+          "https://internshala-clone-uclt.onrender.com/api/application",
+        );
         setdata(res.data);
       } catch (error) {
         console.log(error);
@@ -69,7 +77,7 @@ const index = () => {
   const userapplication = data.filter(
     (app: any) => app.user?.email?.toLowerCase() === user?.email?.toLowerCase(),
   );
-  const filteredapplications = userapplication.filter((application:any) => {
+  const filteredapplications = userapplication.filter((application: any) => {
     const searchmatch =
       application.company?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       application.category?.toLowerCase().includes(searchTerm.toLowerCase());
@@ -83,7 +91,9 @@ const index = () => {
         <div className="bg-white rounded-lg shadow-sm">
           {/* Header */}
           <div className="border-b border-gray-200 px-6 py-4">
-            <h1 className="text-2xl font-bold text-gray-900">My Applications</h1>
+            <h1 className="text-2xl font-bold text-gray-900">
+              My Applications
+            </h1>
             <p className="mt-1 text-sm text-gray-500">
               Track and manage your job and intenrhsip applications
             </p>
@@ -180,7 +190,7 @@ const index = () => {
                 </tr>
               </thead>
               <tbody>
-                {filteredapplications.map((application:any) => (
+                {filteredapplications.map((application: any) => (
                   <tr key={application._id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
@@ -226,7 +236,7 @@ const index = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
                         className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(
-                          application.status
+                          application.status,
                         )}`}
                       >
                         {application.status}

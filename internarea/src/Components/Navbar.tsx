@@ -32,7 +32,7 @@ const Navbar = () => {
   const [password, setPassword] = useState("");
   const [isSignup, setIsSignup] = useState(false);
 
-  // ✅ Sync Redux language -> i18n + local state
+  // Sync Redux language -> i18n + local state
   useEffect(() => {
     if (currentLang) {
       i18n.changeLanguage(currentLang);
@@ -40,7 +40,7 @@ const Navbar = () => {
     }
   }, [currentLang]);
 
-  // ✅ LOGIN
+  // LOGIN
   const handlelogin = async () => {
     try {
       await signInWithPopup(auth, provider);
@@ -80,13 +80,13 @@ const Navbar = () => {
   //     toast.error(error.message);
   //   }
   // };
-  // ✅ LOGOUT
+  // LOGOUT
   const handlelogout = () => {
     signOut(auth);
     toast.success(t("auth.logout"));
   };
 
-  // ✅ LANGUAGE CHANGE
+  // LANGUAGE CHANGE
   const handleLanguageChange = async (newLang: string) => {
     if (newLang === "fr") {
       if (!user?.email) {
@@ -115,7 +115,7 @@ const Navbar = () => {
     }
   };
 
-  // ✅ VERIFY OTP
+  // VERIFY OTP
   const verifyOtp = async () => {
     try {
       const res = await axios.post(
@@ -255,7 +255,7 @@ const Navbar = () => {
                       Forgot Password?
                     </span>
                   </Link>
-                  {/* 🔥 Forgot Password */}
+                  {/* Forgot Password */}
                   {/* {!isSignup && (
                     <button
                       onClick={handleForgotPassword}
@@ -305,7 +305,7 @@ const Navbar = () => {
                 </div>
               ) : (
                 <>
-                  {/* 🔥 NEW Email Login Button */}
+                  {/* NEW Email Login Button */}
                   <button
                     onClick={() => setShowEmailModal(true)}
                     className="border px-4 py-2 rounded-lg hover:bg-gray-50"

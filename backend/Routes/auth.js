@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const resetRequests = {}; // temporary (use DB in production)
+const resetRequests = {}; // temporary
 
-// POST /api/auth/reset-password
 router.post("/reset-password", async (req, res) => {
   const { email } = req.body;
 

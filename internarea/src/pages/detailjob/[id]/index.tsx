@@ -210,7 +210,7 @@ const index = () => {
         category: jobdata.category,
         company: jobdata.company,
         coverLetter,
-        jobId: id, // ✅ IMPORTANT (not "Application")
+        jobId: id,
         availability,
         // resume : resume,
         user: {

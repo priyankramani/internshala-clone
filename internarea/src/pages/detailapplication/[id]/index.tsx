@@ -12,10 +12,9 @@ const index = () => {
     const fetchdata = async () => {
       try {
         setloading(true);
-        // const res = await axios.get(
-        //   `https://internshala-clone-y2p2.onrender.com/api/application/${id}`
-        // );
-        const res = await axios.get(`https://internshala-clone-uclt.onrender.com/api/application/${id}`);
+        const res = await axios.get(
+          `https://internshala-clone-uclt.onrender.com/api/application/${id}`,
+        );
         console.log(res.data);
         setdata(res.data);
       } catch (error) {
@@ -56,8 +55,8 @@ const index = () => {
                     data.status === "accepted"
                       ? "bg-green-100 text-green-600"
                       : data.status === "rejected"
-                      ? "bg-red-100 text-red-600"
-                      : "bg-yellow-100 text-yellow-600"
+                        ? "bg-red-100 text-red-600"
+                        : "bg-yellow-100 text-yellow-600"
                   }`}
                 >
                   <span className="font-semibold capitalize">

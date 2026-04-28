@@ -10,7 +10,7 @@ export default function OTPVerify() {
 
   const dispatch = useDispatch();
 
-  // ✅ Load user safely from sessionStorage
+  // Load user safely from sessionStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
       const stored = sessionStorage.getItem("otp_user");
@@ -33,7 +33,7 @@ export default function OTPVerify() {
         return;
       }
 
-      // ✅ VERIFY OTP
+      // VERIFY OTP
       const res = await axios.post(
         "https://internshala-clone-uclt.onrender.com/api/otp/verify",
         {
@@ -47,10 +47,10 @@ export default function OTPVerify() {
         return;
       }
 
-      // 🔥 IMPORTANT: Mark OTP as verified
+      // IMPORTANT: Mark OTP as verified
       sessionStorage.setItem("otp_verified", "true");
 
-      // ✅ CALL TRACK AGAIN (skip OTP)
+      // CALL TRACK AGAIN (skip OTP)
       await axios.post(
         "https://internshala-clone-uclt.onrender.com/api/login/track",
         {
@@ -60,7 +60,7 @@ export default function OTPVerify() {
         },
       );
 
-      // ✅ RESTORE USER (Redux)
+      // RESTORE USER (Redux)
       dispatch(
         login({
           uid: user.uid,
@@ -71,7 +71,7 @@ export default function OTPVerify() {
         }),
       );
 
-      // ✅ SAVE USER (optional but recommended)
+      // SAVE USER (optional but recommended)
       await axios.post(
         "https://internshala-clone-uclt.onrender.com/api/user/save",
         {
@@ -82,13 +82,10 @@ export default function OTPVerify() {
         },
       );
 
-      // ✅ CLEANUP SESSION
+      // CLEANUP SESSION
       sessionStorage.removeItem("otp_user");
 
-      // ⛔ DO NOT remove otp_verified here
-      // It is needed to prevent loop
-
-      // ✅ REDIRECT AFTER SMALL DELAY (important for Redux/UI sync)
+      // REDIRECT AFTER SMALL DELAY
       setTimeout(() => {
         window.location.href = "/";
       }, 300);
@@ -98,7 +95,7 @@ export default function OTPVerify() {
     }
   };
 
-  // ✅ Proper loading state
+  // Proper loading state
   if (loading) {
     return <p className="p-6 text-center">Loading...</p>;
   }
