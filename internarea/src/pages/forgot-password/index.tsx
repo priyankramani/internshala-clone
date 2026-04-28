@@ -8,6 +8,7 @@ export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [cooldown, setCooldown] = useState(0);
+  const [generatedPassword, setGeneratedPassword] = useState("");
 
   useEffect(() => {
     const lastRequest = localStorage.getItem("resetRequest");
@@ -34,6 +35,22 @@ export default function ForgotPassword() {
 
     return () => clearInterval(timer);
   }, [cooldown]);
+
+  const generatePassword = () => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    let result = "";
+
+    for (let i = 0; i < 10; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
+    setGeneratedPassword(result);
+
+    navigator.clipboard.writeText(result);
+
+    toast.success("Password generated & copied");
+  };
 
   const handleReset = async () => {
     if (!email) {
@@ -84,6 +101,25 @@ export default function ForgotPassword() {
           onChange={(e) => setEmail(e.target.value)}
           className="border p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+
+        <div className="mb-4">
+          <button
+            onClick={generatePassword}
+            className="bg-green-600 text-white px-4 py-2 rounded-lg w-full"
+          >
+            Generate Secure Password
+          </button>
+
+          {generatedPassword && (
+            <div className="mt-3 border p-3 rounded-lg bg-gray-100">
+              <p className="text-sm text-gray-600 mb-1">Generated Password:</p>
+
+              <p className="font-bold break-all">{generatedPassword}</p>
+
+              <p className="text-xs text-green-600 mt-1">Copied to clipboard</p>
+            </div>
+          )}
+        </div>
 
         <button
           onClick={handleReset}
