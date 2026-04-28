@@ -2,7 +2,12 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  sendPasswordResetEmail,
+} from "firebase/auth";
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyB-5LLtlp1YQeXZN9v-JFfjhhbHqmME9bc",
@@ -10,7 +15,7 @@ const firebaseConfig = {
   projectId: "internarea-607af",
   storageBucket: "internarea-607af.firebasestorage.app",
   messagingSenderId: "900565876638",
-  appId: "1:900565876638:web:8111863932cddc3e77a08f"
+  appId: "1:900565876638:web:8111863932cddc3e77a08f",
 };
 
 // Initialize Firebase
@@ -19,7 +24,9 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 export { auth, provider };
 
-
+export const resetPassword = (email) => {
+  return sendPasswordResetEmail(auth, email);
+};
 // // Import the functions you need from the SDKs you need
 // import { initializeApp } from "firebase/app";
 // // TODO: Add SDKs for Firebase products that you want to use

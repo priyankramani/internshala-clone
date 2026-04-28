@@ -1,7 +1,17 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import {ArrowUpRight, Book, Calendar, Cat, Clock, DollarSign, ExternalLink, MapPin, X} from "lucide-react";
+import {
+  ArrowUpRight,
+  Book,
+  Calendar,
+  Cat,
+  Clock,
+  DollarSign,
+  ExternalLink,
+  MapPin,
+  X,
+} from "lucide-react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
@@ -108,37 +118,31 @@ import { selectuser } from "@/Feature/Userslice";
 //     },
 //   ];
 const index = () => {
-    const router = useRouter();
-    const { id } = router.query;
-    const [jobdata, setjob] = useState<any>([]);
-    useEffect(()=>{
-        const fetchdata = async ()=>{
-          try {
-            const res = await axios.get(`https://internshala-clone-uclt.onrender.com/api/job/${id}`);
-            setjob(res.data);
-          } catch (error) {
-            console.log(error);
-          }
-        }
-        fetchdata()
-      },[id])
-    const [availability, setAvailability] = useState("");
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [coverLetter, setCoverLetter] = useState("");
-    // const user = true;
-    const user=useSelector(selectuser);
-    if (!jobdata) {
-        return (
-        <div className="min-h-screen flex items-center justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-        </div>
-        );
-    }
+  const router = useRouter();
+  const { id } = router.query;
+  const [jobdata, setjob] = useState<any>([]);
+  
+
+  const [availability, setAvailability] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [coverLetter, setCoverLetter] = useState("");
+  const [remaining, setRemaining] = useState<number | null>(null);
+  // const user = true;
+  const user = useSelector(selectuser);
+  if (!jobdata) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
   useEffect(() => {
     const fetchdata = async () => {
       try {
         // const res = await axios.get(`https://internshala-clone-y2p2.onrender.com/api/job/${id}`);
-        const res = await axios.get(`https://internshala-clone-uclt.onrender.com/api/job/${id}`);
+        const res = await axios.get(
+          `https://internshala-clone-uclt.onrender.com/api/job/${id}`,
+        );
         setjob(res.data);
       } catch (error) {
         console.log(error);
@@ -147,36 +151,96 @@ const index = () => {
     fetchdata();
   }, [id]);
 
+  useEffect(() => {
+    const fetchSub = async () => {
+      try {
+        const [subRes, countRes] = await Promise.all([
+          axios.get(
+            `http://localhost:5000/api/resume/subscription/${user?.email}`,
+          ),
+          axios.get(
+            `http://localhost:5000/api/application/count/${user?.email}`,
+          ),
+        ]);
+
+        const sub = subRes.data;
+        const used = countRes.data.count;
+
+        if (sub) {
+          if (sub.applicationLimit === -1) {
+            setRemaining(Infinity);
+          } else {
+            const remainingCount = Math.max(0, sub.applicationLimit - used);
+            setRemaining(remainingCount);
+          }
+        } else {
+          // FREE PLAN
+          const remainingCount = Math.max(0, 1 - used);
+          setRemaining(remainingCount);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    if (user?.email) fetchSub();
+  }, [user?.email]);
+
   const handlesubmitapplication = async () => {
+    if (remaining === 0) {
+      toast.error("Application limit reached");
+      return;
+    }
     if (!coverLetter.trim()) {
       toast.error("please write a cover letter");
       return;
     }
+
     if (!availability) {
       toast.error("please select your availability");
       return;
     }
+
+    if (!id) {
+      toast.error("Job not loaded");
+      return;
+    }
+
     try {
       const applicationdata = {
         category: jobdata.category,
         company: jobdata.company,
-        coverLetter: coverLetter,
-        user: user,
-        Application: id,
+        coverLetter,
+        jobId: id, // ✅ IMPORTANT (not "Application")
         availability,
+        // resume : resume,
+        user: {
+          email: user.email,
+          name: user.name,
+        },
       };
-      // await axios.post(
-      //   "https://internshala-clone-y2p2.onrender.com/api/application",
-      //   applicationdata
-      // );
-      await axios.post("https://internshala-clone-uclt.onrender.com/api/application", applicationdata);
-      toast.success("Application submit successfully");
+
+      const res = await axios.post(
+        "http://localhost:5000/api/application",
+        applicationdata,
+      );
+
+      toast.success("Application submitted successfully");
       router.push("/job");
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to submit application");
+    } catch (error: any) {
+      console.error("FULL ERROR:", error);
+      console.error("RESPONSE:", error.response?.data);
+
+      if (error.response?.status === 403) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error(
+          error.response?.data?.message || "Failed to submit application",
+        );
+      }
     }
   };
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -247,13 +311,26 @@ const index = () => {
           </h3>
           <p className="text-gray-600 mb-6">{jobdata.AdditionalInfo}</p>
         </div>
+
+        {remaining !== null && (
+          <p className="text-sm text-gray-600 mb-2">
+            Remaining Applications:{" "}
+            {remaining === Infinity ? "Unlimited" : remaining}
+          </p>
+        )}
+
         {/* Apply Button */}
         <div className="p-6 flex justify-center">
           <button
+            disabled={remaining === 0}
             onClick={() => setIsModalOpen(true)}
-            className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition duration-150"
+            className={`px-8 py-3 rounded-lg ${
+              remaining === 0
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700 text-white"
+            }`}
           >
-            Apply Now
+            {remaining === 0 ? "Limit Reached" : "Apply Now"}
           </button>
         </div>
       </div>
@@ -328,7 +405,9 @@ const index = () => {
               <div className="flex justify-end pt-4">
                 {user ? (
                   <button
-                    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700" onClick={handlesubmitapplication}>
+                    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+                    onClick={handlesubmitapplication}
+                  >
                     Submit Application
                   </button>
                 ) : (

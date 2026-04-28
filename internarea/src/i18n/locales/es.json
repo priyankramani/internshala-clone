@@ -1,0 +1,13 @@
+{
+  "navbar": {
+    "internships": "Pasantías",
+    "jobs": "Trabajos",
+    "search": "Buscar oportunidades...",
+    "login": "Continuar con Google",
+    "logout": "Cerrar sesión"
+  },
+  "home": {
+    "title": "Haz realidad tu carrera soñada",
+    "subtitle": "Tendencias en InternArea 🔥"
+  }
+}

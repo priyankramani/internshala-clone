@@ -1,0 +1,47 @@
+{
+  "navbar": {
+    "internships": "Internships",
+    "jobs": "Jobs",
+    "search": "Search opportunities...",
+    "login": "Continue with Google",
+    "logout": "Logout"
+  },
+  "slider": {
+    "title1": "Start Your Career Journey",
+    "title2": "Learn From The Best",
+    "title3": "Grow Your Skills",
+    "title4": "Connect With Top Companies"
+  },
+  "home": {
+    "title": "Make your dream career a reality",
+    "subtitle": "Trending on InternArea 🔥",
+    "categories": "POPULAR CATEGORIES:",
+    "latestInternships": "Latest internships on Intern Area",
+    "latestJobs": "Latest Jobs",
+    "activelyHiring": "Actively Hiring",
+    "viewDetails": "View details",
+    "internshipTag": "Internship",
+    "jobTag": "Job"
+  },
+  "stats": {
+    "companies": "Companies hiring",
+    "openings": "New openings everyday",
+    "students": "Active students",
+    "learners": "Learners"
+  },
+  "categories": {
+    "bigBrands": "Big Brands",
+    "wfh": "Work From Home",
+    "partTime": "Part-time",
+    "mba": "MBA",
+    "engineering": "Engineering",
+    "media": "Media",
+    "design": "Design",
+    "dataScience": "Data Science"
+  },
+  "auth": {
+    "loginSuccess": "Logged in successfully",
+    "loginFail": "Login failed",
+    "logout": "Logged out successfully"
+  }
+}

@@ -1,74 +1,185 @@
 const express = require("express");
 const router = express.Router();
-const application = require("../Model/Application");
+
+const Application = require("../Model/Application");
+const Subscription = require("../Model/Subscription");
 
 router.post("/", async (req, res) => {
-  const applicationipdata = new application({
-    company: req.body.company,
-    category: req.body.category,
-    coverLetter: req.body.coverLetter,
-    user: req.body.user,
-    Application: req.body.Application,
-    body: req.body.body,
-  });
-  await applicationipdata
-    .save()
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((error) => {
-      console.log(error);
+  try {
+    console.log("📥 Incoming:", req.body);
+
+    // ✅ Normalize email
+    const userEmail = req.body.user?.email?.toLowerCase();
+
+    if (!userEmail) {
+      console.log("❌ Email missing");
+      return res.status(400).json({
+        success: false,
+        message: "User email is required",
+      });
+    }
+
+    console.log("👤 User Email:", userEmail);
+
+    // 🔹 GET SUBSCRIPTION
+    const sub = await Subscription.findOne({ email: userEmail });
+    console.log("📦 Subscription:", sub);
+
+    // 🔥 IDENTIFY USER TYPE
+    const isFreeUser = !sub || sub.plan === "free";
+
+    // 🔥 DEFINE ONCE (fix scope bug)
+    const startOfMonth = new Date();
+    startOfMonth.setUTCDate(1);
+    startOfMonth.setUTCHours(0, 0, 0, 0);
+
+    console.log("🕒 Start of month (UTC):", startOfMonth);
+
+    // =========================
+    // 🔹 FREE PLAN LOGIC
+    // =========================
+    if (isFreeUser) {
+      const count = await Application.countDocuments({
+        "user.email": userEmail,
+        createdAt: { $gte: startOfMonth },
+      });
+
+      console.log("📊 Free user count:", count);
+
+      if (count >= 1) {
+        console.log("⛔ Free limit reached");
+
+        return res.status(403).json({
+          success: false,
+          message: "Free plan limit reached (1 per month)",
+        });
+      }
+    }
+
+    // // =========================
+    // // 🔹 PAID PLAN LOGIC
+    // // =========================
+    // if (sub && sub.plan !== "free") {
+    //   if (new Date() > sub.endDate) {
+    //     return res.status(403).json({
+    //       success: false,
+    //       message: "Subscription expired",
+    //     });
+    //   }
+
+    //   if (
+    //     sub.applicationLimit !== -1 &&
+    //     sub.applicationsUsed >= sub.applicationLimit
+    //   ) {
+    //     return res.status(403).json({
+    //       success: false,
+    //       message: "Application limit reached",
+    //     });
+    //   }
+    // }
+
+    // =========================
+    // 🔹 PAID PLAN LOGIC (DYNAMIC COUNT)
+    // =========================
+    if (sub && sub.plan !== "free") {
+      if (new Date() > sub.endDate) {
+        return res.status(403).json({
+          success: false,
+          message: "Subscription expired",
+        });
+      }
+
+      const used = await Application.countDocuments({
+        "user.email": userEmail,
+      });
+
+      console.log("📊 Paid user count:", used);
+
+      if (sub.applicationLimit !== -1 && used >= sub.applicationLimit) {
+        return res.status(403).json({
+          success: false,
+          message: "Application limit reached",
+        });
+      }
+    }
+
+    // 🔥 CLEAN DATA STRUCTURE
+    const applicationData = {
+      company: req.body.company,
+      category: req.body.category,
+      coverLetter: req.body.coverLetter,
+      internshipId: req.body.internshipId || null,
+      jobId: req.body.jobId || null,
+      availability: req.body.availability,
+      resume: req.body.resume,
+      user: {
+        email: userEmail,
+        name: req.body.user?.name,
+      },
+    };
+
+    // =========================
+    // 🔥 DOUBLE CHECK (ANTI-SPAM)
+    // =========================
+    if (isFreeUser) {
+      const countAgain = await Application.countDocuments({
+        "user.email": userEmail,
+        createdAt: { $gte: startOfMonth },
+      });
+
+      if (countAgain >= 1) {
+        console.log("⛔ Blocked at final check");
+
+        return res.status(403).json({
+          success: false,
+          message: "Free plan limit reached (1 per month)",
+        });
+      }
+    }
+
+    // =========================
+    // 🔹 SAVE APPLICATION
+    // =========================
+    const newApp = await Application.create(applicationData);
+    console.log("✅ Saved:", newApp._id);
+
+    // // =========================
+    // // 🔹 INCREMENT USAGE (PAID ONLY)
+    // // =========================
+    // if (sub && sub.plan !== "free") {
+    //   sub.applicationsUsed += 1;
+    //   await sub.save();
+    // }
+
+    res.status(201).json({
+      success: true,
+      message: "Application submitted",
+      data: newApp,
     });
-});
+  } catch (err) {
+    console.error("🔥 ERROR:", err);
 
-router.get("/", async (req, res) => {
-  try {
-    const data = await application.find();
-    res.json(data).status(200);
-  } catch (error) {
-    console.log(error);
-    res.status(404).json({ error: "internal server error" });
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
 });
 
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
+// routes/application.js
+
+router.get("/count/:email", async (req, res) => {
   try {
-    const data = await application.findById(id);
-    if (!data) {
-      res.status(404).json({ error: "application not found" });
-    }
-    res.json(data).status(200);
-  } catch (error) {
-    console.log(error);
-    res.status(404).json({ error: "internal server error" });
+    const email = req.params.email.toLowerCase();
+
+    const count = await Application.countDocuments({
+      "user.email": email,
+    });
+
+    res.json({ count });
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
   }
 });
-router.put("/:id", async (req, res) => {
-  const { id } = req.params;
-  const { action } = req.body;
-  let status;
-  if (action === "accepted") {
-    status = "accepted";
-  } else if (action === "rejected") {
-    status = "rejected";
-  } else {
-    res.status(404).json({ error: "Invalid action" });
-    return;
-  }
-  try {
-    const updateapplication = await application.findByIdAndUpdate(
-      id,
-      { $set: { status } },
-      { new: true }
-    ); 
-    if (!updateapplication) {
-      res.status(404).json({ error: "Not able to update the application" });
-      return;
-    }
-    res.status(200).json({ sucess: true, data: updateapplication });
-  } catch (error) {
-    res.status(500).json({ error: "internal server error" });
-  }
-});
+
 module.exports = router;

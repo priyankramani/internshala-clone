@@ -1,0 +1,13 @@
+{
+  "navbar": {
+    "internships": "实习",
+    "jobs": "工作",
+    "search": "搜索机会...",
+    "login": "使用谷歌继续",
+    "logout": "退出"
+  },
+  "home": {
+    "title": "实现你的梦想职业",
+    "subtitle": "InternArea 热门 🔥"
+  }
+}

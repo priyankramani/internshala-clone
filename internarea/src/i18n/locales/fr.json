@@ -1,0 +1,13 @@
+{
+  "navbar": {
+    "internships": "Stages",
+    "jobs": "Emplois",
+    "search": "Rechercher des opportunités...",
+    "login": "Continuer avec Google",
+    "logout": "Se déconnecter"
+  },
+  "home": {
+    "title": "Réalisez votre carrière de rêve",
+    "subtitle": "Tendances sur InternArea 🔥"
+  }
+}

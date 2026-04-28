@@ -1,22 +1,32 @@
 const mongoose = require("mongoose");
-const Applicationschema = new mongoose.Schema({
-  company: String,
-  category: String,
-  coverLetter: String,
-  user: Object,
-  internshipId: String,
-  availability: String,
-  resume: Object,
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  status: {
-    type: String,
-    enum: ["pending", "approved", "accepted", "rejected"],
-    default: "pending",
-  },
-  Application: Object,
-});
 
-module.exports = mongoose.model("Application", Applicationschema);
+const applicationSchema = new mongoose.Schema(
+  {
+    company: { type: String, required: true },
+    category: { type: String, required: true },
+    coverLetter: { type: String, required: true },
+    internshipId: { type: String, default: null },
+    jobId: { type: String, default: null }, // ✅ ADD THIS
+    availability: { type: String, required: true },
+
+    resume: { type: Object}, // ✅ make optional
+
+    user: {
+      email: { type: String, required: true, index: true },
+      name: String,
+    },
+
+    status: {
+      type: String,
+      enum: ["pending", "approved", "accepted", "rejected"],
+      default: "pending",
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { timestamps: true }, // 🔥 IMPORTANT
+);
+
+module.exports = mongoose.model("Application", applicationSchema);

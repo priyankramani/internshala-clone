@@ -1,0 +1,41 @@
+{
+  "navbar": {
+    "internships": "इंटर्नशिप",
+    "jobs": "नौकरियां",
+    "search": "अवसर खोजें...",
+    "login": "गूगल से जारी रखें",
+    "logout": "लॉग आउट"
+  },
+  "home": {
+    "title": "अपने सपनों का करियर बनाएं",
+    "subtitle": "InternArea पर ट्रेंडिंग 🔥",
+    "categories": "लोकप्रिय श्रेणियाँ:",
+    "latestInternships": "नवीनतम इंटर्नशिप",
+    "latestJobs": "नवीनतम नौकरियां",
+    "activelyHiring": "अभी भर्ती चल रही है",
+    "viewDetails": "विवरण देखें",
+    "internshipTag": "इंटर्नशिप",
+    "jobTag": "नौकरी"
+  },
+  "stats": {
+    "companies": "कंपनियां भर्ती कर रही हैं",
+    "openings": "नई नौकरियां हर दिन",
+    "students": "सक्रिय छात्र",
+    "learners": "सीखने वाले"
+  },
+  "categories": {
+    "bigBrands": "बड़े ब्रांड्स",
+    "wfh": "वर्क फ्रॉम होम",
+    "partTime": "पार्ट-टाइम",
+    "mba": "एमबीए",
+    "engineering": "इंजीनियरिंग",
+    "media": "मीडिया",
+    "design": "डिज़ाइन",
+    "dataScience": "डेटा साइंस"
+  },
+  "auth": {
+    "loginSuccess": "सफलतापूर्वक लॉगिन हुआ",
+    "loginFail": "लॉगिन विफल",
+    "logout": "सफलतापूर्वक लॉगआउट हुआ"
+  }
+}
