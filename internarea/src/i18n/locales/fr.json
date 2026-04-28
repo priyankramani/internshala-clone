@@ -4,10 +4,117 @@
     "jobs": "Emplois",
     "search": "Rechercher des opportunités...",
     "login": "Continuer avec Google",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "emailLogin": "Connexion",
+    "admin": "Admin",
+    "publicSpace": "Espace Public",
+    "friends": "Amis",
+    "signup": "S'inscrire",
+    "alreadyAccount": "Vous avez déjà un compte ? Connectez-vous",
+    "dontHaveAccount": "Vous n'avez pas de compte ? Inscrivez-vous",
+    "forgotPassword": "Mot de passe oublié ?",
+    "close": "Fermer",
+    "enterEmail": "Entrez votre email",
+    "enterPassword": "Entrez votre mot de passe",
+    "otpTitle": "Entrez OTP",
+    "verify": "Vérifier",
+    "otpPlaceholder": "Entrez OTP",
+    "frenchEnabled": "Langue française activée",
+    "otpSent": "OTP envoyé à votre email",
+    "invalidOtp": "OTP invalide",
+    "loginFirst": "Veuillez d'abord vous connecter",
+    "failedOtp": "Échec de l'envoi OTP",
+    "PublicSpace": "Espace Public",
+    "Friends": "Amis"
   },
+
+  "slider": {
+    "title1": "Commencez votre parcours professionnel",
+    "title2": "Apprenez des meilleurs",
+    "title3": "Développez vos compétences",
+    "title4": "Connectez-vous avec les meilleures entreprises"
+  },
+
   "home": {
     "title": "Réalisez votre carrière de rêve",
-    "subtitle": "Tendances sur InternArea 🔥"
+    "subtitle": "Tendances sur InternArea 🔥",
+    "categories": "CATÉGORIES POPULAIRES :",
+    "latestInternships": "Derniers stages sur InternArea",
+    "latestJobs": "Derniers emplois",
+    "activelyHiring": "Recrutement actif",
+    "viewDetails": "Voir les détails",
+    "internshipTag": "Stage",
+    "jobTag": "Emploi"
+  },
+
+  "stats": {
+    "companies": "Entreprises qui recrutent",
+    "openings": "Nouvelles offres chaque jour",
+    "students": "Étudiants actifs",
+    "learners": "Apprenants"
+  },
+
+  "categories": {
+    "bigBrands": "Grandes marques",
+    "wfh": "Travail à domicile",
+    "partTime": "Temps partiel",
+    "mba": "MBA",
+    "engineering": "Ingénierie",
+    "media": "Médias",
+    "design": "Design",
+    "dataScience": "Science des données"
+  },
+
+  "common": {
+    "all": "Tous"
+  },
+
+  "auth": {
+    "loginSuccess": "Connexion réussie",
+    "loginFail": "Échec de la connexion",
+    "logout": "Déconnexion réussie"
+  },
+
+  "footer": {
+    "internshipPlaces": "Stages par lieux",
+    "internshipStream": "Stages par domaine",
+    "jobPlaces": "Emplois par lieux",
+    "jobStreams": "Emplois par domaine",
+
+    "newYork": "New York",
+    "losAngeles": "Los Angeles",
+    "chicago": "Chicago",
+    "sanFrancisco": "San Francisco",
+    "miami": "Miami",
+    "seattle": "Seattle",
+
+    "about": "À propos",
+    "careers": "Carrières",
+    "press": "Presse",
+    "news": "Actualités",
+    "mediaKit": "Kit média",
+    "contact": "Contact",
+
+    "blog": "Blog",
+    "newsletter": "Newsletter",
+    "events": "Événements",
+    "helpCenter": "Centre d'aide",
+    "tutorials": "Tutoriels",
+    "support": "Support",
+
+    "startups": "Startups",
+    "enterprise": "Entreprise",
+    "government": "Gouvernement",
+    "saas": "SaaS",
+    "marketplaces": "Places de marché",
+    "ecommerce": "E-commerce",
+
+    "aboutUs": "À propos",
+    "teamDiary": "Journal de l'équipe",
+    "terms": "Conditions générales",
+    "sitemap": "Plan du site",
+
+    "copyright": "Copyright 2025. Tous droits réservés.",
+    "androidApp": "Obtenir l'application Android"
   }
 }

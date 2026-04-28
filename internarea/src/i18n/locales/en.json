@@ -4,14 +4,37 @@
     "jobs": "Jobs",
     "search": "Search opportunities...",
     "login": "Continue with Google",
-    "logout": "Logout"
+    "logout": "Logout",
+    "emailLogin": "Login",
+    "admin": "Admin",
+    "publicSpace": "Public Space",
+    "friends": "Friends",
+    "signup": "Sign Up",
+    "alreadyAccount": "Already have an account? Login",
+    "dontHaveAccount": "Don't have an account? Sign up",
+    "forgotPassword": "Forgot Password?",
+    "close": "Close",
+    "enterEmail": "Enter Email",
+    "enterPassword": "Enter Password",
+    "otpTitle": "Enter OTP",
+    "verify": "Verify",
+    "otpPlaceholder": "Enter OTP",
+    "frenchEnabled": "French language enabled",
+    "otpSent": "OTP sent to your email",
+    "invalidOtp": "Invalid OTP",
+    "loginFirst": "Please login first",
+    "failedOtp": "Failed to send OTP",
+    "PublicSpace" : "Public Space",
+    "Friends" : "Friends"
   },
+
   "slider": {
     "title1": "Start Your Career Journey",
     "title2": "Learn From The Best",
     "title3": "Grow Your Skills",
     "title4": "Connect With Top Companies"
   },
+
   "home": {
     "title": "Make your dream career a reality",
     "subtitle": "Trending on InternArea 🔥",
@@ -23,12 +46,14 @@
     "internshipTag": "Internship",
     "jobTag": "Job"
   },
+
   "stats": {
     "companies": "Companies hiring",
     "openings": "New openings everyday",
     "students": "Active students",
     "learners": "Learners"
   },
+
   "categories": {
     "bigBrands": "Big Brands",
     "wfh": "Work From Home",
@@ -39,9 +64,57 @@
     "design": "Design",
     "dataScience": "Data Science"
   },
+
+  "common": {
+    "all": "All"
+  },
+
   "auth": {
     "loginSuccess": "Logged in successfully",
     "loginFail": "Login failed",
     "logout": "Logged out successfully"
+  },
+
+  "footer": {
+    "internshipPlaces": "Internship by places",
+    "internshipStream": "Internship by stream",
+    "jobPlaces": "Job Places",
+    "jobStreams": "Jobs by streams",
+
+    "newYork": "New York",
+    "losAngeles": "Los Angeles",
+    "chicago": "Chicago",
+    "sanFrancisco": "San Francisco",
+    "miami": "Miami",
+    "seattle": "Seattle",
+
+    "about": "About us",
+    "careers": "Careers",
+    "press": "Press",
+    "news": "News",
+    "mediaKit": "Media kit",
+    "contact": "Contact",
+
+    "blog": "Blog",
+    "newsletter": "Newsletter",
+    "events": "Events",
+    "helpCenter": "Help center",
+    "tutorials": "Tutorials",
+    "support": "Support",
+
+    "startups": "Startups",
+    "enterprise": "Enterprise",
+    "government": "Government",
+    "saas": "SaaS",
+    "marketplaces": "Marketplaces",
+    "ecommerce": "Ecommerce",
+
+    "aboutUs": "About us",
+    "teamDiary": "Team diary",
+    "terms": "Terms and conditions",
+    "sitemap": "Sitemap",
+
+    "copyright": "Copyright 2025. All Rights Reserved.",
+    "androidApp": "Get Android App"
   }
 }

@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useTranslation } from "react-i18next";
+
 import {
   ArrowUpRight,
   MapPin,
@@ -16,11 +17,17 @@ import {
 } from "lucide-react";
 
 export default function SvgSlider() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const [internships, setinternship] = useState<any>([]);
-  const [jobs, setjob] = useState<any>([]);
+  const [mounted, setMounted] = useState(false);
+
+  const [internships, setinternship] = useState<any[]>([]);
+  const [jobs, setjob] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const categories = [
     { key: "bigBrands", value: "Big Brands" },
@@ -72,12 +79,14 @@ export default function SvgSlider() {
           ),
           axios.get("https://internshala-clone-uclt.onrender.com/api/job"),
         ]);
+
         setinternship(internshipres.data);
         setjob(jobres.data);
       } catch (error) {
         console.log(error);
       }
     };
+
     fetchdata();
   }, []);
 
@@ -89,6 +98,8 @@ export default function SvgSlider() {
     (item: any) => !selectedCategory || item.category === selectedCategory,
   );
 
+  if (!mounted) return null;
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* HERO */}
@@ -96,6 +107,7 @@ export default function SvgSlider() {
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           {t("home.title")}
         </h1>
+
         <p className="text-xl text-gray-600">{t("home.subtitle")}</p>
       </div>
 
@@ -113,45 +125,14 @@ export default function SvgSlider() {
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
               <div className={`relative h-[400px] ${slide.bgColor}`}>
-                {/* SVG Pattern */}
                 <div className="absolute inset-0 opacity-20">
                   <svg className="w-full h-full">
-                    {slide.pattern === "pattern-1" && (
-                      <pattern id="pattern-1" width="20" height="20">
-                        <circle cx="10" cy="10" r="3" fill="white" />
-                      </pattern>
-                    )}
-                    {slide.pattern === "pattern-2" && (
-                      <pattern id="pattern-2" width="40" height="40">
-                        <rect
-                          x="15"
-                          y="15"
-                          width="10"
-                          height="10"
-                          fill="white"
-                        />
-                      </pattern>
-                    )}
-                    {slide.pattern === "pattern-3" && (
-                      <pattern id="pattern-3" width="40" height="40">
-                        <path d="M0 20 L20 0 L40 20 L20 40 Z" fill="white" />
-                      </pattern>
-                    )}
-                    {slide.pattern === "pattern-4" && (
-                      <pattern id="pattern-4" width="60" height="60">
-                        <path d="M30 5 L55 30 L30 55 L5 30 Z" fill="white" />
-                      </pattern>
-                    )}
-                    <rect
-                      width="100%"
-                      height="100%"
-                      fill={`url(#${slide.pattern})`}
-                    />
+                    <rect width="100%" height="100%" fill="white" />
                   </svg>
                 </div>
 
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <h2 className="text-4xl font-bold text-white">
+                  <h2 className="text-4xl font-bold text-white text-center px-4">
                     {slide.title}
                   </h2>
                 </div>
@@ -167,10 +148,19 @@ export default function SvgSlider() {
           {t("home.latestInternships")}
         </h2>
 
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 items-center">
           <span className="text-gray-700 font-medium">
             {t("home.categories")}
           </span>
+
+          <button
+            onClick={() => setSelectedCategory("")}
+            className={`px-4 py-2 rounded-full ${
+              selectedCategory === "" ? "bg-blue-600 text-white" : "bg-gray-100"
+            }`}
+          >
+            {t("common.all")}
+          </button>
 
           {categories.map((category) => (
             <button
@@ -190,7 +180,7 @@ export default function SvgSlider() {
 
       {/* INTERNSHIPS */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-        {filteredInternships.map((internship: any, index: any) => (
+        {filteredInternships.map((internship: any, index: number) => (
           <div
             key={index}
             className="bg-white rounded-lg shadow-md p-6 transition-transform hover:scale-105"
@@ -246,8 +236,8 @@ export default function SvgSlider() {
           {t("home.latestJobs")}
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {filteredJobs.map((job: any, index: any) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredJobs.map((job: any, index: number) => (
             <div
               key={index}
               className="bg-white rounded-lg shadow-md p-6 transition-transform hover:scale-105"
@@ -306,6 +296,7 @@ export default function SvgSlider() {
               <div className="text-4xl font-bold text-blue-600 mb-2">
                 {stat.number}
               </div>
+
               <div className="text-gray-600">{stat.label}</div>
             </div>
           ))}

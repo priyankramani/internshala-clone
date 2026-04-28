@@ -4,8 +4,37 @@
     "jobs": "नौकरियां",
     "search": "अवसर खोजें...",
     "login": "गूगल से जारी रखें",
-    "logout": "लॉग आउट"
+    "logout": "लॉग आउट",
+    "emailLogin": "लॉगिन",
+    "admin": "एडमिन",
+    "publicSpace": "पब्लिक स्पेस",
+    "friends": "दोस्त",
+    "signup": "साइन अप",
+    "alreadyAccount": "पहले से अकाउंट है? लॉगिन करें",
+    "dontHaveAccount": "अकाउंट नहीं है? साइन अप करें",
+    "forgotPassword": "पासवर्ड भूल गए?",
+    "close": "बंद करें",
+    "enterEmail": "ईमेल दर्ज करें",
+    "enterPassword": "पासवर्ड दर्ज करें",
+    "otpTitle": "OTP दर्ज करें",
+    "verify": "सत्यापित करें",
+    "otpPlaceholder": "OTP दर्ज करें",
+    "frenchEnabled": "फ्रेंच भाषा सक्षम हुई",
+    "otpSent": "OTP आपके ईमेल पर भेजा गया",
+    "invalidOtp": "अमान्य OTP",
+    "loginFirst": "कृपया पहले लॉगिन करें",
+    "failedOtp": "OTP भेजने में विफल",
+    "PublicSpace": "सार्वजनिक स्थान",
+    "Friends": "मित्र"
   },
+
+  "slider": {
+    "title1": "अपने करियर की यात्रा शुरू करें",
+    "title2": "सर्वश्रेष्ठ से सीखें",
+    "title3": "अपने कौशल विकसित करें",
+    "title4": "शीर्ष कंपनियों से जुड़ें"
+  },
+
   "home": {
     "title": "अपने सपनों का करियर बनाएं",
     "subtitle": "InternArea पर ट्रेंडिंग 🔥",
@@ -17,12 +46,14 @@
     "internshipTag": "इंटर्नशिप",
     "jobTag": "नौकरी"
   },
+
   "stats": {
     "companies": "कंपनियां भर्ती कर रही हैं",
     "openings": "नई नौकरियां हर दिन",
     "students": "सक्रिय छात्र",
     "learners": "सीखने वाले"
   },
+
   "categories": {
     "bigBrands": "बड़े ब्रांड्स",
     "wfh": "वर्क फ्रॉम होम",
@@ -33,9 +64,57 @@
     "design": "डिज़ाइन",
     "dataScience": "डेटा साइंस"
   },
+
+  "common": {
+    "all": "सभी"
+  },
+
   "auth": {
     "loginSuccess": "सफलतापूर्वक लॉगिन हुआ",
     "loginFail": "लॉगिन विफल",
     "logout": "सफलतापूर्वक लॉगआउट हुआ"
+  },
+
+  "footer": {
+    "internshipPlaces": "स्थान के अनुसार इंटर्नशिप",
+    "internshipStream": "क्षेत्र के अनुसार इंटर्नशिप",
+    "jobPlaces": "स्थान के अनुसार नौकरियां",
+    "jobStreams": "क्षेत्र के अनुसार नौकरियां",
+
+    "newYork": "न्यूयॉर्क",
+    "losAngeles": "लॉस एंजिल्स",
+    "chicago": "शिकागो",
+    "sanFrancisco": "सैन फ्रांसिस्को",
+    "miami": "मियामी",
+    "seattle": "सिएटल",
+
+    "about": "हमारे बारे में",
+    "careers": "करियर",
+    "press": "प्रेस",
+    "news": "समाचार",
+    "mediaKit": "मीडिया किट",
+    "contact": "संपर्क",
+
+    "blog": "ब्लॉग",
+    "newsletter": "न्यूज़लेटर",
+    "events": "कार्यक्रम",
+    "helpCenter": "सहायता केंद्र",
+    "tutorials": "ट्यूटोरियल",
+    "support": "सहायता",
+
+    "startups": "स्टार्टअप्स",
+    "enterprise": "एंटरप्राइज",
+    "government": "सरकार",
+    "saas": "सास",
+    "marketplaces": "मार्केटप्लेस",
+    "ecommerce": "ई-कॉमर्स",
+
+    "aboutUs": "हमारे बारे में",
+    "teamDiary": "टीम डायरी",
+    "terms": "नियम और शर्तें",
+    "sitemap": "साइटमैप",
+
+    "copyright": "कॉपीराइट 2025. सर्वाधिकार सुरक्षित।",
+    "androidApp": "Android ऐप प्राप्त करें"
   }
 }

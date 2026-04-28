@@ -4,10 +4,117 @@
     "jobs": "Empregos",
     "search": "Buscar oportunidades...",
     "login": "Continuar com Google",
-    "logout": "Sair"
+    "logout": "Sair",
+    "emailLogin": "Login",
+    "admin": "Administrador",
+    "publicSpace": "Espaço Público",
+    "friends": "Amigos",
+    "signup": "Cadastrar-se",
+    "alreadyAccount": "Já tem uma conta? Faça login",
+    "dontHaveAccount": "Não tem uma conta? Cadastre-se",
+    "forgotPassword": "Esqueceu a senha?",
+    "close": "Fechar",
+    "enterEmail": "Digite seu email",
+    "enterPassword": "Digite sua senha",
+    "otpTitle": "Digite OTP",
+    "verify": "Verificar",
+    "otpPlaceholder": "Digite OTP",
+    "frenchEnabled": "Idioma francês ativado",
+    "otpSent": "OTP enviado para seu email",
+    "invalidOtp": "OTP inválido",
+    "loginFirst": "Faça login primeiro",
+    "failedOtp": "Falha ao enviar OTP",
+    "PublicSpace": "Espaço Público",
+    "Friends": "Amigos"
   },
+
+  "slider": {
+    "title1": "Comece sua jornada profissional",
+    "title2": "Aprenda com os melhores",
+    "title3": "Desenvolva suas habilidades",
+    "title4": "Conecte-se com as melhores empresas"
+  },
+
   "home": {
     "title": "Transforme sua carreira dos sonhos em realidade",
-    "subtitle": "Tendências no InternArea 🔥"
+    "subtitle": "Tendências no InternArea 🔥",
+    "categories": "CATEGORIAS POPULARES:",
+    "latestInternships": "Últimos estágios no InternArea",
+    "latestJobs": "Últimos empregos",
+    "activelyHiring": "Contratando ativamente",
+    "viewDetails": "Ver detalhes",
+    "internshipTag": "Estágio",
+    "jobTag": "Emprego"
+  },
+
+  "stats": {
+    "companies": "Empresas contratando",
+    "openings": "Novas vagas todos os dias",
+    "students": "Estudantes ativos",
+    "learners": "Aprendizes"
+  },
+
+  "categories": {
+    "bigBrands": "Grandes marcas",
+    "wfh": "Trabalho remoto",
+    "partTime": "Meio período",
+    "mba": "MBA",
+    "engineering": "Engenharia",
+    "media": "Mídia",
+    "design": "Design",
+    "dataScience": "Ciência de Dados"
+  },
+
+  "common": {
+    "all": "Todos"
+  },
+
+  "auth": {
+    "loginSuccess": "Login realizado com sucesso",
+    "loginFail": "Falha no login",
+    "logout": "Logout realizado com sucesso"
+  },
+
+  "footer": {
+    "internshipPlaces": "Estágios por locais",
+    "internshipStream": "Estágios por área",
+    "jobPlaces": "Empregos por locais",
+    "jobStreams": "Empregos por área",
+
+    "newYork": "Nova York",
+    "losAngeles": "Los Angeles",
+    "chicago": "Chicago",
+    "sanFrancisco": "São Francisco",
+    "miami": "Miami",
+    "seattle": "Seattle",
+
+    "about": "Sobre nós",
+    "careers": "Carreiras",
+    "press": "Imprensa",
+    "news": "Notícias",
+    "mediaKit": "Kit de mídia",
+    "contact": "Contato",
+
+    "blog": "Blog",
+    "newsletter": "Newsletter",
+    "events": "Eventos",
+    "helpCenter": "Central de ajuda",
+    "tutorials": "Tutoriais",
+    "support": "Suporte",
+
+    "startups": "Startups",
+    "enterprise": "Empresa",
+    "government": "Governo",
+    "saas": "SaaS",
+    "marketplaces": "Marketplaces",
+    "ecommerce": "E-commerce",
+
+    "aboutUs": "Sobre nós",
+    "teamDiary": "Diário da equipe",
+    "terms": "Termos e condições",
+    "sitemap": "Mapa do site",
+
+    "copyright": "Copyright 2025. Todos os direitos reservados.",
+    "androidApp": "Obter aplicativo Android"
   }
 }

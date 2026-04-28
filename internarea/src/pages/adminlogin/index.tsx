@@ -20,23 +20,33 @@ const index = () => {
     const [isloading, setisloading] = useState(false);
     const handlesubmit = async (e: React.FormEvent) => {
       e.preventDefault();
+
       if (!formadata.username || !formadata.password) {
-        toast.error("Please fill in all detials");
+        toast.error("Please fill in all details");
         return;
       }
+
       try {
         setisloading(true);
-        // const res = await axios.post(
-        //   "https://internshala-clone-y2p2.onrender.com/api/admin/adminlogin",
-        //   formadata
-        // );
-        
-        const res = await axios.post('https://internshala-clone-uclt.onrender.com/api/admin/adminlogin', formadata);
-        toast.success("logged in successfuly"); 
-        router.push("/adminpanel");
-      } catch (error) {
+
+        const res = await axios.post(
+          "https://internshala-clone-uclt.onrender.com/api/admin/adminlogin",
+          formadata,
+        );
+
+        // Check response status
+        if (res.status === 200) {
+          toast.success("Logged in successfully");
+          router.push("/adminpanel");
+        }
+      } catch (error: any) {
         console.log(error);
-        toast.error("Invalid credentials");
+
+        if (error.response?.status === 401) {
+          toast.error("Invalid credentials");
+        } else {
+          toast.error("Something went wrong");
+        }
       } finally {
         setisloading(false);
       }

@@ -4,10 +4,117 @@
     "jobs": "工作",
     "search": "搜索机会...",
     "login": "使用谷歌继续",
-    "logout": "退出"
+    "logout": "退出登录",
+    "emailLogin": "登录",
+    "admin": "管理员",
+    "publicSpace": "公共空间",
+    "friends": "朋友",
+    "signup": "注册",
+    "alreadyAccount": "已经有账号？登录",
+    "dontHaveAccount": "没有账号？注册",
+    "forgotPassword": "忘记密码？",
+    "close": "关闭",
+    "enterEmail": "输入邮箱",
+    "enterPassword": "输入密码",
+    "otpTitle": "输入OTP",
+    "verify": "验证",
+    "otpPlaceholder": "输入OTP",
+    "frenchEnabled": "法语已启用",
+    "otpSent": "OTP已发送到您的邮箱",
+    "invalidOtp": "无效OTP",
+    "loginFirst": "请先登录",
+    "failedOtp": "发送OTP失败",
+    "PublicSpace": "公共空间",
+    "Friends": "朋友"
   },
+
+  "slider": {
+    "title1": "开始你的职业旅程",
+    "title2": "向最优秀的人学习",
+    "title3": "提升你的技能",
+    "title4": "连接顶级公司"
+  },
+
   "home": {
     "title": "实现你的梦想职业",
-    "subtitle": "InternArea 热门 🔥"
+    "subtitle": "InternArea 热门 🔥",
+    "categories": "热门分类：",
+    "latestInternships": "InternArea 最新实习",
+    "latestJobs": "最新工作",
+    "activelyHiring": "正在积极招聘",
+    "viewDetails": "查看详情",
+    "internshipTag": "实习",
+    "jobTag": "工作"
+  },
+
+  "stats": {
+    "companies": "正在招聘的公司",
+    "openings": "每天新增职位",
+    "students": "活跃学生",
+    "learners": "学习者"
+  },
+
+  "categories": {
+    "bigBrands": "大品牌",
+    "wfh": "居家办公",
+    "partTime": "兼职",
+    "mba": "MBA",
+    "engineering": "工程",
+    "media": "媒体",
+    "design": "设计",
+    "dataScience": "数据科学"
+  },
+
+  "common": {
+    "all": "全部"
+  },
+
+  "auth": {
+    "loginSuccess": "登录成功",
+    "loginFail": "登录失败",
+    "logout": "退出成功"
+  },
+
+  "footer": {
+    "internshipPlaces": "按地点查找实习",
+    "internshipStream": "按领域查找实习",
+    "jobPlaces": "按地点查找工作",
+    "jobStreams": "按领域查找工作",
+
+    "newYork": "纽约",
+    "losAngeles": "洛杉矶",
+    "chicago": "芝加哥",
+    "sanFrancisco": "旧金山",
+    "miami": "迈阿密",
+    "seattle": "西雅图",
+
+    "about": "关于我们",
+    "careers": "职业",
+    "press": "新闻",
+    "news": "资讯",
+    "mediaKit": "媒体资料包",
+    "contact": "联系",
+
+    "blog": "博客",
+    "newsletter": "新闻通讯",
+    "events": "活动",
+    "helpCenter": "帮助中心",
+    "tutorials": "教程",
+    "support": "支持",
+
+    "startups": "初创公司",
+    "enterprise": "企业",
+    "government": "政府",
+    "saas": "SaaS",
+    "marketplaces": "市场平台",
+    "ecommerce": "电子商务",
+
+    "aboutUs": "关于我们",
+    "teamDiary": "团队日志",
+    "terms": "条款和条件",
+    "sitemap": "网站地图",
+
+    "copyright": "版权所有 2025。保留所有权利。",
+    "androidApp": "获取 Android 应用"
   }
 }

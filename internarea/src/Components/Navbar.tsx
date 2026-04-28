@@ -176,8 +176,8 @@ const Navbar = () => {
               </div>
             </div>
 
-            <a href="/publicspace">Public Space</a>
-            <a href="/friends">Friends</a>
+            <a href="/publicspace">{t("navbar.PublicSpace")}</a>
+            <a href="/friends">{t("navbar.Friends")}</a>
             {/* Language Selector */}
             <select
               onChange={(e) => handleLanguageChange(e.target.value)}
@@ -194,7 +194,7 @@ const Navbar = () => {
 
             {/* OTP MODAL */}
             {showOtpInput && (
-              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+              <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center">
                 <div className="bg-white p-6 rounded-lg shadow-lg">
                   <h2 className="text-lg font-bold mb-4">Enter OTP</h2>
 
@@ -218,7 +218,7 @@ const Navbar = () => {
 
             {/* Email Login Modal */}
             {showEmailModal && (
-              <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+              <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center">
                 <div className="bg-white p-6 rounded-lg w-96">
                   <h2 className="text-xl font-bold mb-4">
                     {isSignup ? "Sign Up" : "Login"}
@@ -310,7 +310,7 @@ const Navbar = () => {
                     onClick={() => setShowEmailModal(true)}
                     className="border px-4 py-2 rounded-lg hover:bg-gray-50"
                   >
-                    Login
+                    {t("navbar.emailLogin")}
                   </button>
 
                   {/* Google Login */}
@@ -318,14 +318,14 @@ const Navbar = () => {
                     onClick={handlelogin}
                     className="border px-4 py-2 rounded-lg hover:bg-gray-50"
                   >
-                    Continue with Google
+                    {t("navbar.login")}
                   </button>
 
                   <a
                     href="/adminlogin"
                     className="text-gray-600 hover:text-gray-800"
                   >
-                    Admin
+                    {t("navbar.admin")}
                   </a>
                 </>
               )}

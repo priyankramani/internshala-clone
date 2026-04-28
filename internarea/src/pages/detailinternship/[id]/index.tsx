@@ -267,7 +267,7 @@ const index = () => {
           <h2 className="text-xl font-bold text-gray-900 mb-4">
             About {internshipData.company}
           </h2>
-          <div className="flex items-center space-x-2 mb-4">
+          {/* <div className="flex items-center space-x-2 mb-4">
             <a
               href="#"
               className="text-blue-600 hover:text-blue-700 flex items-center space-x-1"
@@ -275,7 +275,7 @@ const index = () => {
               <span>Visit company website</span>
               <ExternalLink className="h-4 w-4" />
             </a>
-          </div>
+          </div> */}
           <p className="text-gray-600">{internshipData.aboutCompany}</p>
         </div>
         {/* Internship Details Section */}
