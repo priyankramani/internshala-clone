@@ -70,7 +70,7 @@ export default function ResumePage() {
 
       console.log("Order:", data);
 
-      if (!window.Razorpay) {
+      if (!(window as any).Razorpay) {
         alert("Razorpay not loaded");
         return;
       }
@@ -83,7 +83,7 @@ export default function ResumePage() {
         description: "Resume Service",
         order_id: data.id,
 
-        handler: async function (response) {
+        handler: async function (response : any) {
           try {
             // 🔹 Step A: Verify payment
             const verifyRes = await axios.post(
@@ -127,7 +127,7 @@ export default function ResumePage() {
         },
       };
 
-      const rzp = new window.Razorpay(options);
+      const rzp = new (window as any).Razorpay(options);
       rzp.open();
     } catch (error) {
       console.error(error);
