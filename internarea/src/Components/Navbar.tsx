@@ -95,9 +95,12 @@ const Navbar = () => {
       }
 
       try {
-        await axios.post("http://localhost:5000/api/otp/send-otp", {
-          email: user.email,
-        });
+        await axios.post(
+          "https://internshala-clone-uclt.onrender.com/api/otp/send-otp",
+          {
+            email: user.email,
+          },
+        );
 
         toast.success("OTP sent to your email");
         setPendingLang("fr");
@@ -115,10 +118,13 @@ const Navbar = () => {
   // ✅ VERIFY OTP
   const verifyOtp = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/otp/verify-otp", {
-        email: user.email,
-        otp,
-      });
+      const res = await axios.post(
+        "https://internshala-clone-uclt.onrender.com/api/otp/verify-otp",
+        {
+          email: user.email,
+          otp,
+        },
+      );
 
       if (res.data.success) {
         dispatch(setLanguage(pendingLang));

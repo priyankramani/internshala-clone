@@ -26,9 +26,12 @@ router.post("/track", async (req, res) => {
 
     // 🚨 RULE 2: Chrome requires OTP
     if (!skipOTP && browser === "Chrome") {
-      await axios.post("http://localhost:5000/api/otp/send", {
-        email: email,
-      });
+      await axios.post(
+        "https://internshala-clone-uclt.onrender.com/api/otp/send",
+        {
+          email: email,
+        },
+      );
 
       return res.json({
         requireOTP: true,

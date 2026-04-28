@@ -12,7 +12,7 @@ export default function Friends() {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState<any[]>([]);
 
-  const BASE = "http://localhost:5000/api/friend";
+  const BASE = "https://internshala-clone-uclt.onrender.com/api/friend";
 
   // ✅ Fetch friend data
   const fetchData = async (uid: string) => {
@@ -40,7 +40,7 @@ export default function Friends() {
 
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/user/search?email=${value}`,
+        `https://internshala-clone-uclt.onrender.com/api/user/search?email=${value}`,
       );
       setResults(res.data);
     } catch (err) {

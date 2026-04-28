@@ -121,7 +121,6 @@ const index = () => {
   const router = useRouter();
   const { id } = router.query;
   const [jobdata, setjob] = useState<any>([]);
-  
 
   const [availability, setAvailability] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -156,10 +155,10 @@ const index = () => {
       try {
         const [subRes, countRes] = await Promise.all([
           axios.get(
-            `http://localhost:5000/api/resume/subscription/${user?.email}`,
+            `https://internshala-clone-uclt.onrender.com/api/resume/subscription/${user?.email}`,
           ),
           axios.get(
-            `http://localhost:5000/api/application/count/${user?.email}`,
+            `https://internshala-clone-uclt.onrender.com/api/application/count/${user?.email}`,
           ),
         ]);
 
@@ -221,7 +220,7 @@ const index = () => {
       };
 
       const res = await axios.post(
-        "http://localhost:5000/api/application",
+        "https://internshala-clone-uclt.onrender.com/api/application",
         applicationdata,
       );
 

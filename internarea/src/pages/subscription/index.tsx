@@ -11,7 +11,7 @@ export default function SubscriptionPage() {
   const buyPlan = async (plan: string) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/resume/create-subscription-order",
+        "https://internshala-clone-uclt.onrender.com/api/resume/create-subscription-order",
         { plan },
       );
 
@@ -26,7 +26,7 @@ export default function SubscriptionPage() {
         handler: async function (response: any) {
           // VERIFY PAYMENT
           const verify = await axios.post(
-            "http://localhost:5000/api/resume/verify-payment",
+            "https://internshala-clone-uclt.onrender.com/api/resume/verify-payment",
             response,
           );
 
@@ -37,7 +37,7 @@ export default function SubscriptionPage() {
 
           // ACTIVATE
           await axios.post(
-            "http://localhost:5000/api/resume/activate-subscription",
+            "https://internshala-clone-uclt.onrender.com/api/resume/activate-subscription",
             {
               // userId: user?._id,
               email: user?.email,

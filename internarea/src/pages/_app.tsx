@@ -50,11 +50,14 @@ function AuthListener() {
       try {
         const otpVerified = sessionStorage.getItem("otp_verified") === "true";
 
-        const res = await axios.post("http://localhost:5000/api/login/track", {
-          userId: authuser.uid,
-          email: authuser.email,
-          skipOTP: otpVerified, // 🔥 KEY FIX
-        });
+        const res = await axios.post(
+          "https://internshala-clone-uclt.onrender.com/api/login/track",
+          {
+            userId: authuser.uid,
+            email: authuser.email,
+            skipOTP: otpVerified, // 🔥 KEY FIX
+          },
+        );
 
         // 🚫 MOBILE BLOCK
         if (res.data?.message?.includes("Mobile login")) {

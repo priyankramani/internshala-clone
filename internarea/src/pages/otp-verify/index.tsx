@@ -34,10 +34,13 @@ export default function OTPVerify() {
       }
 
       // ✅ VERIFY OTP
-      const res = await axios.post("http://localhost:5000/api/otp/verify", {
-        email: user.email,
-        otp,
-      });
+      const res = await axios.post(
+        "https://internshala-clone-uclt.onrender.com/api/otp/verify",
+        {
+          email: user.email,
+          otp,
+        },
+      );
 
       if (!res.data.success) {
         alert("Invalid OTP");
@@ -48,11 +51,14 @@ export default function OTPVerify() {
       sessionStorage.setItem("otp_verified", "true");
 
       // ✅ CALL TRACK AGAIN (skip OTP)
-      await axios.post("http://localhost:5000/api/login/track", {
-        userId: user.uid,
-        email: user.email,
-        skipOTP: true,
-      });
+      await axios.post(
+        "https://internshala-clone-uclt.onrender.com/api/login/track",
+        {
+          userId: user.uid,
+          email: user.email,
+          skipOTP: true,
+        },
+      );
 
       // ✅ RESTORE USER (Redux)
       dispatch(
@@ -66,12 +72,15 @@ export default function OTPVerify() {
       );
 
       // ✅ SAVE USER (optional but recommended)
-      await axios.post("http://localhost:5000/api/user/save", {
-        uid: user.uid,
-        name: user.displayName,
-        email: user.email,
-        photo: user.photoURL,
-      });
+      await axios.post(
+        "https://internshala-clone-uclt.onrender.com/api/user/save",
+        {
+          uid: user.uid,
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        },
+      );
 
       // ✅ CLEANUP SESSION
       sessionStorage.removeItem("otp_user");

@@ -21,7 +21,9 @@ const ProfilePage = () => {
     if (!user?.email) return;
 
     axios
-      .get(`http://localhost:5000/api/application/count/${user.email}`)
+      .get(
+        `https://internshala-clone-uclt.onrender.com/api/application/count/${user.email}`,
+      )
       .then((res) => {
         setUsedCount(res.data.count);
       })
@@ -35,7 +37,7 @@ const ProfilePage = () => {
     const fetchHistory = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/login/${user.uid}`,
+          `https://internshala-clone-uclt.onrender.com/api/login/${user.uid}`,
         );
         setLoginHistory(res.data);
       } catch (err) {
@@ -51,7 +53,9 @@ const ProfilePage = () => {
     if (!user?.email) return;
 
     axios
-      .get(`http://localhost:5000/api/resume/get-resume/${user.email}`)
+      .get(
+        `https://internshala-clone-uclt.onrender.com/api/resume/get-resume/${user.email}`,
+      )
       .then((res) => {
         if (res.data && Object.keys(res.data).length > 0) {
           setHasResume(true);
@@ -67,7 +71,7 @@ const ProfilePage = () => {
   //   const fetchSub = async () => {
   //     try {
   //       const res = await axios.get(
-  //         `http://localhost:5000/api/resume/subscription/${user.email}`,
+  //         `https://internshala-clone-uclt.onrender.com/api/resume/subscription/${user.email}`,
   //       );
   //       setSubscription(res.data);
   //     } catch (err) {
@@ -85,7 +89,7 @@ const ProfilePage = () => {
     const fetchSub = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/resume/subscription/${user.email}`,
+          `https://internshala-clone-uclt.onrender.com/api/resume/subscription/${user.email}`,
         );
 
         console.log("SUB DATA:", res.data); // 🔥 DEBUG

@@ -24,7 +24,7 @@ export default function ForgotPassword() {
       }
     }
   }, []);
-  
+
   useEffect(() => {
     if (cooldown <= 0) return;
 
@@ -43,9 +43,12 @@ export default function ForgotPassword() {
 
     try {
       // 🔥 Step 1: Check backend restriction
-      await axios.post("http://localhost:5000/api/reset/request-reset", {
-        email,
-      });
+      await axios.post(
+        "https://internshala-clone-uclt.onrender.com/api/reset/request-reset",
+        {
+          email,
+        },
+      );
 
       // 🔥 Step 2: Firebase reset email
       await resetPassword(email);

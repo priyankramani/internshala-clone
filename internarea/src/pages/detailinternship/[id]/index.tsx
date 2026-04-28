@@ -112,10 +112,10 @@ const index = () => {
       try {
         const [subRes, countRes] = await Promise.all([
           axios.get(
-            `http://localhost:5000/api/resume/subscription/${user?.email}`,
+            `https://internshala-clone-uclt.onrender.com/api/resume/subscription/${user?.email}`,
           ),
           axios.get(
-            `http://localhost:5000/api/application/count/${user?.email}`,
+            `https://internshala-clone-uclt.onrender.com/api/application/count/${user?.email}`,
           ),
         ]);
 
@@ -148,7 +148,7 @@ const index = () => {
 
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/resume/get-resume/${user.email}`,
+          `https://internshala-clone-uclt.onrender.com/api/resume/get-resume/${user.email}`,
         );
         setResume(res.data);
       } catch (err) {
@@ -199,7 +199,7 @@ const index = () => {
 
       try {
         const res = await axios.post(
-          "http://localhost:5000/api/application", // ⚠️ use YOUR backend
+          "https://internshala-clone-uclt.onrender.com/api/application", // ⚠️ use YOUR backend
           applicationdata,
         );
 

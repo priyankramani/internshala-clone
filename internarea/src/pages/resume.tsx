@@ -28,9 +28,12 @@ export default function ResumePage() {
   // 🔹 Send OTP
   const sendOtp = async () => {
     try {
-      await axios.post("http://localhost:5000/api/otp/send", {
-        email: user?.email,
-      });
+      await axios.post(
+        "https://internshala-clone-uclt.onrender.com/api/otp/send",
+        {
+          email: user?.email,
+        },
+      );
 
       toast.success("OTP sent");
       setShowOtp(true);
@@ -42,10 +45,13 @@ export default function ResumePage() {
   // 🔹 Verify OTP + Payment
   const verifyOtpAndPay = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/otp/verify", {
-        email: user?.email,
-        otp,
-      });
+      const res = await axios.post(
+        "https://internshala-clone-uclt.onrender.com/api/otp/verify",
+        {
+          email: user?.email,
+          otp,
+        },
+      );
 
       if (res.data.success) {
         startPayment();
@@ -59,7 +65,7 @@ export default function ResumePage() {
   const startPayment = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/resume/create-order",
+        "https://internshala-clone-uclt.onrender.com/api/resume/create-order",
       );
 
       console.log("Order:", data);
@@ -81,7 +87,7 @@ export default function ResumePage() {
           try {
             // 🔹 Step A: Verify payment
             const verifyRes = await axios.post(
-              "http://localhost:5000/api/resume/verify-payment",
+              "https://internshala-clone-uclt.onrender.com/api/resume/verify-payment",
               response,
             );
 
@@ -93,10 +99,13 @@ export default function ResumePage() {
             // 🔹 Step B: KEEP YOUR EXISTING LOGIC (no change)
             toast.success("Payment Successful 🎉");
 
-            await axios.post("http://localhost:5000/api/resume/save-resume", {
-              email: user?.email,
-              resumeData: form,
-            });
+            await axios.post(
+              "https://internshala-clone-uclt.onrender.com/api/resume/save-resume",
+              {
+                email: user?.email,
+                resumeData: form,
+              },
+            );
 
             setIsPaid(true);
             setExistingResume(form);
@@ -130,7 +139,7 @@ export default function ResumePage() {
   //   try {
   //     toast.success("Simulated Payment Success (Demo Mode)");
 
-  //     await axios.post("http://localhost:5000/api/resume/save-resume", {
+  //     await axios.post("https://internshala-clone-uclt.onrender.com/api/resume/save-resume", {
   //       email: user?.email,
   //       resumeData: form,
   //     });
@@ -142,7 +151,7 @@ export default function ResumePage() {
   //     toast.error("Something went wrong");
   //   }
   // };
-  
+
   const downloadPDF = async () => {
     const html2canvas = (await import("html2canvas")).default;
     const { jsPDF } = await import("jspdf");
@@ -191,7 +200,7 @@ export default function ResumePage() {
 
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/resume/get-resume/${user?.email}`,
+          `https://internshala-clone-uclt.onrender.com/api/resume/get-resume/${user?.email}`,
         );
 
         // ✅ CHECK IF REAL DATA EXISTS

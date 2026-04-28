@@ -12,7 +12,7 @@ export default function PublicSpace() {
   const [loadingUser, setLoadingUser] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  const BASE_URL = "http://localhost:5000/api/post";
+  const BASE_URL = "https://internshala-clone-uclt.onrender.com/api/post";
 
   // ✅ Fetch posts safely
   const fetchPosts = async (uid: string) => {
