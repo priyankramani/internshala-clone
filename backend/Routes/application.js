@@ -56,28 +56,6 @@ router.post("/", async (req, res) => {
       }
     }
 
-    // // =========================
-    // // 🔹 PAID PLAN LOGIC
-    // // =========================
-    // if (sub && sub.plan !== "free") {
-    //   if (new Date() > sub.endDate) {
-    //     return res.status(403).json({
-    //       success: false,
-    //       message: "Subscription expired",
-    //     });
-    //   }
-
-    //   if (
-    //     sub.applicationLimit !== -1 &&
-    //     sub.applicationsUsed >= sub.applicationLimit
-    //   ) {
-    //     return res.status(403).json({
-    //       success: false,
-    //       message: "Application limit reached",
-    //     });
-    //   }
-    // }
-
     // =========================
     // 🔹 PAID PLAN LOGIC (DYNAMIC COUNT)
     // =========================
@@ -166,7 +144,22 @@ router.post("/", async (req, res) => {
   }
 });
 
-// routes/application.js
+router.get("/", async (req, res) => {
+  try {
+    const applications = await Application.find().sort({
+      createdAt: -1,
+    });
+
+    res.status(200).json(applications);
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
 
 router.get("/count/:email", async (req, res) => {
   try {

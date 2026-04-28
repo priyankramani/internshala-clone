@@ -33,7 +33,7 @@ const Applications = [
   },
 ];
 const getStatusColor = (status: any) => {
-  switch (status.toLowerCase()) {
+  switch (status?.toLowerCase()) {
     case "approved":
       return "bg-green-100 text-green-800";
     case "rejected":
@@ -67,15 +67,15 @@ const index = () => {
     fetchdata();
   }, []);
   const userapplication = data.filter(
-    (app:any) => app.user?.name === user?.name
+    (app: any) => app.user?.email?.toLowerCase() === user?.email?.toLowerCase(),
   );
   const filteredapplications = userapplication.filter((application:any) => {
     const searchmatch =
-      application.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      application.category.toLowerCase().includes(searchTerm.toLowerCase());
+      application.company?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      application.category?.toLowerCase().includes(searchTerm.toLowerCase());
 
     if (filter === "all") return searchmatch;
-    return searchmatch && application.status.toLowerCase() === filter;
+    return searchmatch && application.status?.toLowerCase() === filter;
   });
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -189,11 +189,11 @@ const index = () => {
                         </div>
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900">
-                            {application.company}
+                            {application?.company}
                           </div>
                           <div className="flex items-center text-sm text-gray-500">
                             <Tag className="h-4 w-4 mr-1" />
-                            {application.category}
+                            {application?.category}
                           </div>
                         </div>
                       </div>
