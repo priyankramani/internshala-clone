@@ -96,7 +96,7 @@ const Navbar = () => {
 
       try {
         await axios.post(
-          "https://internshala-clone-uclt.onrender.com/api/otp/send-otp",
+          "https://internshala-clone-uclt.onrender.com/api/otp/send",
           {
             email: user.email,
           },
@@ -119,7 +119,7 @@ const Navbar = () => {
   const verifyOtp = async () => {
     try {
       const res = await axios.post(
-        "https://internshala-clone-uclt.onrender.com/api/otp/verify-otp",
+        "https://internshala-clone-uclt.onrender.com/api/otp/verify",
         {
           email: user.email,
           otp,
